@@ -5,8 +5,8 @@
   font-family: sans-serif;
   transition: background .5s linear;
 }
-html{
-  background-color: #121212;
+body{
+  background-color: #121212 !important;
 }
 .warpper{
   height: calc(100vh - 57px) !important;

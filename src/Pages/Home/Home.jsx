@@ -1,4 +1,4 @@
-import Navbar from "../../Components/Navbar/Navbar.jsx";
+
 import './Home.css'
 import {Col, Container, Row , Button} from "react-bootstrap";
 import {Link} from "preact-router";
@@ -9,29 +9,30 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import NavBar from "../../Components/Navbar/Navbar.jsx";
 
 export default function Home() {
     return (
         <div className='homeContainer vh-100'>
-            <Navbar active='home'/>
+            <NavBar active='home'/>
             <Container className='homeWrapper'>
                 <Row className='h-100'>
                     <Col xs={12} className='h-100'>
                         <Row className='h-100'>
-                            <Col className='d-flex justify-content-start align-items-center'>
-                                <div class="">
+                            <Col className='d-flex justify-content-start align-items-center w-100'>
+                                <div class="w-100">
                                     <h1 className='text-white mb-0' style={{fontSize: '3rem'}}>
                                         Mohammad Hosein
                                     </h1>
-                                    <h2 className='text-white text-wrap mt-0' style={{fontSize: '5rem' , fontWeight: 'bolder'}}>
+                                    <h2 className='text-white text-wrap mt-0' style={{fontSize: '3rem' ,fontWeight: 'bolder'}}>
                                         Salim Bahrami
                                     </h2>
-                                    <h2 className='text-white' style={{letterSpacing: '.8rem'}}>
+                                    <h2 className='text-white' style={{letterSpacing: '.5rem'}}>
                                         FrontEnd Developer
                                     </h2>
-                                    <div className="d-flex gap-3 align-items-center mt-5">
-                                        <Link href='' className='homeBtn py-2 px-5 rounded-5 text-decoration-none text-white fs-5'>Resume</Link>
-                                        <Link href='' className='homeBtn py-2 px-5 rounded-5 text-decoration-none text-white fs-5'>Portfolio</Link>
+                                    <div className="d-flex gap-3 align-items-center mt-5 flex-wrap">
+                                        <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Resume</Link>
+                                        <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Portfolio</Link>
                                     </div>
                                 </div>
                             </Col>
@@ -39,7 +40,7 @@ export default function Home() {
                     </Col>
                     <Col xs={12} className=''>
                         <Row className=''>
-                            <Col>
+                            <Col className=''>
                                 <div className="d-flex gap-3">
                                     <SocialApp link=''>
                                         <LinkedInIcon className='text-white fs-3'/>
