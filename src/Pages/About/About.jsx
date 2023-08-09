@@ -10,7 +10,7 @@ export default function About() {
     return (
         <div className='aboutContainer vh-100'>
             <NavBar active='about'/>
-            <Container className='homeWrapper'>
+            <Container className='pageWrapper'>
                 <Row className='h-100'>
                     <Col xs={12} className='h-100'>
                         <Row className='h-100'>

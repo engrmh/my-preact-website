@@ -12,7 +12,9 @@ body{
 .warpper{
   height: calc(100vh - 57px) !important;
 }
-
+.pageWrapper{
+  height: calc(100vh - 114px) !important;
+}
 @keyframes slideIn {
   0% {
     opacity: 0;
