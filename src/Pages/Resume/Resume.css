@@ -1,0 +1,6 @@
+.resumeContainer{
+    background-image: url("../../../public/img/resumeBack.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}

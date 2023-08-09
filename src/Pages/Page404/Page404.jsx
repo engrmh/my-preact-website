@@ -1,4 +1,3 @@
-
 import './Page404.css'
 import {Col, Container, Row , Button} from "react-bootstrap";
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
