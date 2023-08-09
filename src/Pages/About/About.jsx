@@ -9,7 +9,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 export default function About() {
     return (
         <div className='aboutContainer vh-100'>
-            <NavBar active='home'/>
+            <NavBar active='about'/>
             <Container className='homeWrapper'>
                 <Row className='h-100'>
                     <Col xs={12} className='h-100'>

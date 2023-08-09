@@ -4,10 +4,20 @@
   box-sizing: border-box;
   font-family: sans-serif;
   transition: background .5s linear;
+  animation: slideIn .5s ease-in-out;
 }
 body{
   background-color: #121212 !important;
 }
 .warpper{
   height: calc(100vh - 57px) !important;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
