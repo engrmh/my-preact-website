@@ -1,4 +1,4 @@
 .aboutContainer {
-    background: url("src/assets/img/prof.png") no-repeat top left ;
+    background: url("../../../public/img/prof.png") no-repeat top left ;
     background-size: cover;
 }
