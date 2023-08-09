@@ -1,5 +1,5 @@
 .homeContainer{
-    background-image: url("public/img/homeBack.jpg");
+    background-image: url("src/assets/img/homeBack.jpg");
     background-position: center;
     background-size: cover;
 }
