@@ -31,7 +31,7 @@ export default function CustomizedTimeline() {
                         FREELANCER
                     </Typography>
                     <Typography>I WORK FOR ME</Typography>
-                    <Typography>2018 - NOW</Typography>
+                    <Typography>2020 - NOW</Typography>
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>

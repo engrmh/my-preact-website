@@ -10,6 +10,7 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavBar from "../../Components/Navbar/Navbar.jsx";
+import FullScreen from "../../Components/Footer/FullScreen.jsx";
 
 export default function Home() {
     return (
@@ -21,17 +22,17 @@ export default function Home() {
                         <Row className='h-100'>
                             <Col className='d-flex justify-content-start align-items-center w-100'>
                                 <div class="w-100">
-                                    <h1 className='text-white mb-0' style={{fontSize: '3rem'}}>
+                                    <h1 className='text-white mb-0 customFont' style={{fontSize: '3rem'}}>
                                         Mohammad Hosein
                                     </h1>
-                                    <h2 className='text-white text-wrap mt-0' style={{fontSize: '3rem' ,fontWeight: 'bolder'}}>
+                                    <h2 className='text-white text-wrap mt-0 customFont' style={{fontSize: '3rem' ,fontWeight: 'bolder'}}>
                                         Salim Bahrami
                                     </h2>
                                     <h2 className='text-white' style={{letterSpacing: '.5rem'}}>
                                         FrontEnd Developer
                                     </h2>
                                     <div className="d-flex gap-3 align-items-center mt-5 flex-wrap">
-                                        <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Resume</Link>
+                                        <Link href='/resume' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Resume</Link>
                                         <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Portfolio</Link>
                                     </div>
                                 </div>
@@ -59,11 +60,7 @@ export default function Home() {
                                     </SocialApp>
                                 </div>
                             </Col>
-                            <Col className='d-flex justify-content-end'>
-                                <Button className='bg-transparent border-0'>
-                                    <FullscreenIcon className='fs-3'/>
-                                </Button>
-                            </Col>
+                            <FullScreen />
                         </Row>
                     </Col>
                 </Row>

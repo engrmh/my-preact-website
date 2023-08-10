@@ -17,7 +17,7 @@ export default function Ranger({image , title , progressCount }) {
                 </div>
             </Col>
             <Col>
-                <input type='range' value={progressCount} className='rangeProgress w-100'/>
+                <input type='range' defaultValue={progressCount} className='rangeProgress w-100' readonly="1"/>
             </Col>
         </Row>
     )

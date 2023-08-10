@@ -10,7 +10,7 @@ function NavBar() {
             <Nav.Link href='/' className='text-white' active>Home</Nav.Link>
             <Nav.Link href='/about' className='text-white'>About</Nav.Link>
             <Nav.Link href='/resume' className='text-white'>Resume</Nav.Link>
-            {/*<Nav.Link href='/portfolio' className='text-white'>Portfolio</Nav.Link>*/}
+            <Nav.Link href='/portfolio' className='text-white'>Portfolio</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

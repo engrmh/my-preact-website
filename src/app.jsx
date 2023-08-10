@@ -15,6 +15,7 @@ export function App() {
         <Home path="/" />
         <About path="/about" />
         <Resume path="/resume" />
+        {/*<Resume path="/portfolio" />*/}
         <Page404 path="/*" default />
       </Router>
     </>

@@ -1,7 +1,6 @@
 
 import './Resume.css'
-import {Col, Container, Row , Button} from "react-bootstrap";
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import {Col, Container, Row} from "react-bootstrap";
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import DataBox from "../../Components/DataBox/DataBox.jsx";
 import Ranger from "../../Components/Ranger/Ranger.jsx";
@@ -11,6 +10,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import FlightIcon from '@mui/icons-material/Flight';
 import CookieIcon from '@mui/icons-material/Cookie';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import FullScreen from "../../Components/Footer/FullScreen.jsx";
 
 export default function Resume() {
     return (
@@ -43,7 +43,7 @@ export default function Resume() {
                                         <MyTimeLine/>
                                     </DataBox>
                                     <DataBox title='EDUCATION'>
-                                        <h6 className='text-white fw-bold'>Computer Engineering(Bachelor')</h6>
+                                        <h6 className='text-white fw-bold'>Computer Engineering(Bachelor)</h6>
                                         <h6 className='text-white'>Payam Noor University</h6>
                                     </DataBox>
                                 </div>
@@ -80,11 +80,7 @@ export default function Resume() {
                     </Col>
                     <Col xs={12} className=''>
                         <Row className=''>
-                            <Col className='d-flex justify-content-end'>
-                                <Button className='bg-transparent border-0'>
-                                    <FullscreenIcon className='fs-3'/>
-                                </Button>
-                            </Col>
+                            <FullScreen/>
                         </Row>
                     </Col>
                 </Row>

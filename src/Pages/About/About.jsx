@@ -5,6 +5,7 @@ import {Link} from "preact-router";
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import FullScreen from "../../Components/Footer/FullScreen.jsx";
 
 export default function About() {
     return (
@@ -37,11 +38,7 @@ export default function About() {
                                     </h5>
                                 </div>
                             </Col>
-                            <Col className='d-flex justify-content-end'>
-                                <Button className='bg-transparent border-0'>
-                                    <FullscreenIcon className='fs-3'/>
-                                </Button>
-                            </Col>
+                            <FullScreen/>
                         </Row>
                     </Col>
                 </Row>
