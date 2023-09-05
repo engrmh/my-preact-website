@@ -1,4 +1,3 @@
-
 import './About.css'
 import {Col, Container, Row , Button} from "react-bootstrap";
 import {Link} from "preact-router";
@@ -6,8 +5,21 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FullScreen from "../../Components/Footer/FullScreen.jsx";
+import {useEffect} from "preact/hooks";
+import {gsap} from "gsap";
 
 export default function About() {
+    useEffect(() => {
+        gsap.context(() => {
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: 'power2'
+                }
+            })
+            tl
+                .from('h2' , { duration: 1 , delay: 1 , y: -50} , '-=0.2')
+        })
+    }, []);
     return (
         <div className='aboutContainer vh-100'>
             <NavBar active='about'/>
@@ -20,7 +32,7 @@ export default function About() {
                                     <h2 className='text-white mb-0 border-bottom border-2 py-0 mb-2' style={{width: 'fit-content'}}>
                                         ABOUT
                                     </h2>
-                                    <Link href='mailto: en.mohammadhosein@gmail.com' className='text-white text-decoration-none'>en.mohammadhosein@gmail.com</Link>
+                                    <Link href='mailto: en.mohammadhosein@gmail.com' className='text-white text-decoration-none mailLink'>en.mohammadhosein@gmail.com</Link>
                                     <p className='text-white mt-5 fs-5' style={{maxWidth: '30rem'}}>
                                         Front-end developer in the web sector with more than 3 years of experience in this field. With great enthusiasm to learn and improve. I am committed to work and responsibility and always try to contribute to the development and improvement of projects in the best possible way. I enjoy team challenges and am interested in the development and growth of my group both in my country and globally.
                                     </p>
