@@ -1,6 +1,23 @@
-.navbar-toggler-icon{
-    color: #fff !important;
+span.navbar-toggler-icon{
+    background-color: #fff !important;
+    border-radius: 5px;
+    padding: 10px;
 }
+
 .navbar-toggler{
-    color: #fff !important;
+    /*background-color: #fff !important;*/
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: all 0.5s linear !important;
+}
+
+.navbar-toggler:hover{
+    transform: rotate(90deg);
+}
+
+.navLinks > a{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    /*width: fit-content !important;*/
 }

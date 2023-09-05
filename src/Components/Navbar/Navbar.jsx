@@ -1,8 +1,9 @@
 import {Container , Nav , Navbar , NavDropdown} from 'react-bootstrap';
 import {useEffect , useRef} from "preact/hooks";
 import {gsap} from "gsap";
+import './NavBar.css'
 
-function NavBar() {
+function NavBar({active}) {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -21,11 +22,11 @@ function NavBar() {
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className=''/>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto navLinks">
-            <Nav.Link href='/' className='text-white' active>Home</Nav.Link>
-            <Nav.Link href='/about' className='text-white'>About</Nav.Link>
-            <Nav.Link href='/resume' className='text-white'>Resume</Nav.Link>
-            <Nav.Link href='/portfolio' className='text-white'>Portfolio</Nav.Link>
+          <Nav className="navLinks">
+            <Nav.Link href='/' className={active === 'home'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Home</Nav.Link>
+            <Nav.Link href='/about' className={active === 'about'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>About</Nav.Link>
+            <Nav.Link href='/resume' className={active === 'resume'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Resume</Nav.Link>
+            <Nav.Link href='/portfolio' className={active === 'portfolio'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Portfolio</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

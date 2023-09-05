@@ -1,5 +1,5 @@
 
-export default function DataBox({title , children}) {
+export default function DataBox({title , children }) {
     return (
         <div>
             <h4 className="mt-4 text-white border-primary border-bottom border-3" style={{width:'fit-content'}}>{title}</h4>

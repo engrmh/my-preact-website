@@ -1,4 +1,3 @@
-
 import './Resume.css'
 import {Col, Container, Row} from "react-bootstrap";
 import NavBar from "../../Components/Navbar/Navbar.jsx";
