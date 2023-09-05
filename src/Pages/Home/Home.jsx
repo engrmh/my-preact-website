@@ -1,4 +1,3 @@
-
 import './Home.css'
 import {Col, Container, Row , Button} from "react-bootstrap";
 import {Link} from "preact-router";
@@ -11,8 +10,25 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import FullScreen from "../../Components/Footer/FullScreen.jsx";
+import {useEffect} from "preact/hooks";
+import {gsap} from "gsap";
 
 export default function Home() {
+    useEffect(() => {
+        gsap.context(() => {
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: 'power2'
+                }
+            })
+            tl
+                .from('h1' , { duration: 1 , delay: 1 , y: -50} , '-=0.2')
+                .from('h2' , {autoAlpha: 0 , duration: 1 , y: 50 , stagger: 0.2} , '-=0.2')
+                .from('.homeBtn' , { autoAlpha: 0 , duration: 0.7 , delay: 0.8 , x: -30 , stagger: 0.5} , 1.5)
+                .from('.social' , { autoAlpha: 0 , duration: 1 , x: -30 , stagger: 0.5} , '-=0.2')
+
+        })
+    }, []);
     return (
         <div className='homeContainer vh-100'>
             <NavBar active='home'/>
@@ -32,8 +48,8 @@ export default function Home() {
                                         FrontEnd Developer
                                     </h2>
                                     <div className="d-flex gap-3 align-items-center mt-5 flex-wrap">
-                                        <Link href='/resume' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Resume</Link>
-                                        <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5'>Portfolio</Link>
+                                        <Link href='/resume' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5 homeBtn'>Resume</Link>
+                                        <Link href='' className='homeBtn py-2 px-4 rounded-5 text-decoration-none text-white fs-5 homeBtn'>Portfolio</Link>
                                     </div>
                                 </div>
                             </Col>
@@ -43,20 +59,20 @@ export default function Home() {
                         <Row className=''>
                             <Col className=''>
                                 <div className="d-flex gap-3">
-                                    <SocialApp link=''>
-                                        <LinkedInIcon className='text-white fs-3'/>
+                                    <SocialApp link='https://www.linkedin.com/mohammad-hosein-salimbahrami'>
+                                        <LinkedInIcon className='text-white fs-3 social'/>
+                                    </SocialApp>
+                                    <SocialApp link='https://www.instagram.com/engr.mh'>
+                                        <InstagramIcon className='text-white fs-3 social'/>
                                     </SocialApp>
                                     <SocialApp link=''>
-                                        <InstagramIcon className='text-white fs-3'/>
+                                        <PinterestIcon className='text-white fs-3 social'/>
                                     </SocialApp>
-                                    <SocialApp link=''>
-                                        <PinterestIcon className='text-white fs-3'/>
+                                    <SocialApp link='https://t.me/engr_mh'>
+                                        <TelegramIcon className='text-white fs-3 social'/>
                                     </SocialApp>
-                                    <SocialApp link=''>
-                                        <TelegramIcon className='text-white fs-3'/>
-                                    </SocialApp>
-                                    <SocialApp link=''>
-                                        <GitHubIcon className='text-white fs-3'/>
+                                    <SocialApp link='https://github.com/engrmh'>
+                                        <GitHubIcon className='text-white fs-3 social'/>
                                     </SocialApp>
                                 </div>
                             </Col>
