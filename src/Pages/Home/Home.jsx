@@ -31,7 +31,9 @@ export default function Home() {
     }, []);
     return (
         <div className='homeContainer vh-100'>
-            <NavBar active='home'/>
+            <div class="">
+                <NavBar active='home'/>
+            </div>
             <Container className='pageWrapper'>
                 <Row className='h-100'>
                     <Col xs={12} className='h-100'>
@@ -55,31 +57,29 @@ export default function Home() {
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={12} className=''>
-                        <Row className=''>
-                            <Col className=''>
-                                <div className="d-flex gap-3">
-                                    <SocialApp link='https://www.linkedin.com/mohammad-hosein-salimbahrami'>
-                                        <LinkedInIcon className='text-white fs-3 social'/>
-                                    </SocialApp>
-                                    <SocialApp link='https://www.instagram.com/engr.mh'>
-                                        <InstagramIcon className='text-white fs-3 social'/>
-                                    </SocialApp>
-                                    <SocialApp link=''>
-                                        <PinterestIcon className='text-white fs-3 social'/>
-                                    </SocialApp>
-                                    <SocialApp link='https://t.me/engr_mh'>
-                                        <TelegramIcon className='text-white fs-3 social'/>
-                                    </SocialApp>
-                                    <SocialApp link='https://github.com/engrmh'>
-                                        <GitHubIcon className='text-white fs-3 social'/>
-                                    </SocialApp>
-                                </div>
-                            </Col>
-                            <FullScreen />
-                        </Row>
-                    </Col>
                 </Row>
+            </Container>
+            <Container className='position-fixed bottom-0 start-0 end-0 py-3'>
+                <div className='d-flex'>
+                    <div className="d-flex gap-3">
+                        <SocialApp link='https://www.linkedin.com/mohammad-hosein-salimbahrami'>
+                            <LinkedInIcon className='text-white fs-3 social'/>
+                        </SocialApp>
+                        <SocialApp link='https://www.instagram.com/engr.mh'>
+                            <InstagramIcon className='text-white fs-3 social'/>
+                        </SocialApp>
+                        <SocialApp link=''>
+                            <PinterestIcon className='text-white fs-3 social'/>
+                        </SocialApp>
+                        <SocialApp link='https://t.me/engr_mh'>
+                            <TelegramIcon className='text-white fs-3 social'/>
+                        </SocialApp>
+                        <SocialApp link='https://github.com/engrmh'>
+                            <GitHubIcon className='text-white fs-3 social'/>
+                        </SocialApp>
+                    </div>
+                    <FullScreen />
+                </div>
             </Container>
         </div>
     )
