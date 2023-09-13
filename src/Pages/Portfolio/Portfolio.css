@@ -1,4 +1,7 @@
 .portfolioContainer {
-    background: url("../../../public/img/portfolio.jpg") no-repeat top left ;
+    background-image: url("../../../public/img/portfolio.jpg");
+    background-position: center;
     background-size: cover;
+    background-attachment: fixed;
+
 }
