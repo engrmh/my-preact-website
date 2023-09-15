@@ -58,7 +58,7 @@ export function App() {
       }}
     >
       {location.includes("dashboard") ? (
-        <Container fluid className="p-2">
+        <Container fluid className="">
           <Row>
             <Col xs={12} md={3} lg={2}>
               <SideBar />
@@ -71,7 +71,7 @@ export function App() {
                 <Router>
                   <Dashboard path="/dashboard" />
                   <Projects path="/dashboard/projects" />
-                  <Page404 path="/*" default />
+                  {/*<Page404 path="/dashboard/*" default />*/}
                 </Router>
               </div>
             </Col>

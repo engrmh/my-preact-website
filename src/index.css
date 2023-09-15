@@ -7,7 +7,7 @@
   animation: slideIn .5s ease-in-out;
 }
 body{
-  /*background-color: #121212 !important;*/
+  background-color: #121212 !important;
 }
 .warpper{
   height: calc(100vh - 57px) !important;
