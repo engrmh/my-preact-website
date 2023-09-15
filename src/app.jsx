@@ -15,6 +15,7 @@ import Login from "./Pages/Login/Login.jsx";
 import { Col, Container, Row } from "react-bootstrap";
 import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
 import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
+import { toast } from "react-toastify";
 
 export function App() {
   const location = getCurrentUrl();
@@ -25,6 +26,8 @@ export function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [projects, setProjects] = useState([]);
+  const [connectionStatus, setConnectionStatus] = useState(true);
+  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
 
   const supabase = createClient(
     "https://ujrsoyxcmijpfnzctkok.supabase.co",
@@ -47,6 +50,16 @@ export function App() {
     }
   });
 
+  window.addEventListener("offline", () => {
+    setConnectionStatus(false);
+  });
+
+  window.addEventListener("online", () => {
+    setConnectionStatus(true);
+  });
+
+  console.log(connectionStatus);
+
   return (
     <SkylaxContext.Provider
       value={{
@@ -55,6 +68,8 @@ export function App() {
         userInfo,
         setUserInfo,
         supabase,
+        connectionStatus,
+        setConnectionStatus,
       }}
     >
       {location.includes("dashboard") ? (
