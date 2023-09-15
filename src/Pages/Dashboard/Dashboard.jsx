@@ -1,3 +1,9 @@
+import LiveBoxes from "../../Components/PanelAdmin/LiveBoxes/LiveBoxes.jsx";
+
 export default function Dashboard() {
-  return <></>;
+  return (
+    <div>
+      <LiveBoxes />
+    </div>
+  );
 }

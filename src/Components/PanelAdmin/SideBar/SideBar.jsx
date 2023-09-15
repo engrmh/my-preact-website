@@ -8,7 +8,6 @@ import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirection
 import TaskIcon from "@mui/icons-material/Task";
 import { useContext, useEffect, useState } from "preact/hooks";
 import SkylaxContext from "../../../Context/Context.jsx";
-import { getCurrentUrl } from "preact-router";
 
 export default function SideBar() {
   const siteContext = useContext(SkylaxContext);

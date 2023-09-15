@@ -32,3 +32,19 @@ body{
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+.setShadow{
+  box-shadow: 0 5px 10px #fff !important;
+}
+
+.customBlack{
+  background-color: #333239 !important;
+}
+.customRed{
+  background-color: #e12c6c !important;
+}
+.customGreen{
+  background-color: #5eb860 !important;
+}
+.customBlue{
+  background-color: #1f7cf2 !important;
+}
