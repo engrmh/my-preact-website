@@ -51,7 +51,7 @@ export default function Login() {
           <h3 className="text-white fst-italic mb-5 mt-3">Login</h3>
           <form
             onSubmit={handleSubmit(formSubmiting)}
-            className="d-flex flex-column justify-content-center align-items-center"
+            className="d-flex flex-column justify-content-center align-items-center mb-2"
           >
             <input
               type="email"
@@ -115,6 +115,9 @@ export default function Login() {
               Enter
             </Button>
           </form>
+          <a href="/" className="text-decoration-none text-white">
+            Back to Home
+          </a>
         </div>
       </div>
     </div>

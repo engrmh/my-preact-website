@@ -12,6 +12,9 @@ import { useEffect, useState } from "preact/hooks";
 import { createClient } from "@supabase/supabase-js";
 import SkylaxContext from "./Context/Context.jsx";
 import Login from "./Pages/Login/Login.jsx";
+import { Col, Container, Row } from "react-bootstrap";
+import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
+import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
 
 export function App() {
   const location = getCurrentUrl();
@@ -55,13 +58,25 @@ export function App() {
       }}
     >
       {location.includes("dashboard") ? (
-        <>
-          <Router>
-            <Dashboard path="/dashboard" />
-            <Projects path="/dashboard/projects" />
-            <Page404 path="/*" default />
-          </Router>
-        </>
+        <Container fluid className="p-2">
+          <Row>
+            <Col xs={12} md={9} lg={10}>
+              <div class="">
+                <TopBar />
+              </div>
+              <div class="">
+                <Router>
+                  <Dashboard path="/dashboard" />
+                  <Projects path="/dashboard/projects" />
+                  <Page404 path="/*" default />
+                </Router>
+              </div>
+            </Col>
+            <Col xs={12} md={3} lg={2}>
+              <SideBar />
+            </Col>
+          </Row>
+        </Container>
       ) : (
         <>
           <Router>
