@@ -11,3 +11,7 @@
 .sideBarLinkActive{
     background-color: #e12c6c !important;
 }
+.btn-close{
+    color:#ffffff !important;
+    background-color: #fff !important;
+}

@@ -16,19 +16,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
 import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
 import { toast } from "react-toastify";
+import SideBarOffCanvas from "./Components/PanelAdmin/SideBar/SideBarOffCanvas/SideBarOffCanvas.jsx";
 
 export function App() {
   const location = getCurrentUrl();
-
-  // const currentProject = useRouter()
-  // console.log(currentProject[0].matches.current)
-
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [projects, setProjects] = useState([]);
   const [connectionStatus, setConnectionStatus] = useState(true);
-  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
-
+  const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
   const supabase = createClient(
     "https://ujrsoyxcmijpfnzctkok.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVqcnNveXhjbWlqcGZuemN0a29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ3MjI4ODIsImV4cCI6MjAxMDI5ODg4Mn0.ZK2RZzNPPH_OgmTdp2tcmJgCMyWhwNxwvGqJ2W69l8Q"
@@ -37,6 +33,7 @@ export function App() {
   useEffect(() => {
     getAllProjects();
     // console.log(projects);
+    // console.log(isShowSideBarMenu);
   }, []);
 
   const getAllProjects = async () => {
@@ -58,40 +55,43 @@ export function App() {
     setConnectionStatus(true);
   });
 
-  console.log(connectionStatus);
-
   return (
-    <SkylaxContext.Provider
-      value={{
-        isLogin,
-        setIsLogin,
-        userInfo,
-        setUserInfo,
-        supabase,
-        connectionStatus,
-        setConnectionStatus,
-      }}
-    >
+    <>
       {location.includes("dashboard") ? (
-        <Container fluid className="">
-          <Row>
-            <Col xs={12} md={3} lg={2}>
-              <SideBar />
-            </Col>
-            <Col xs={12} md={9} lg={10}>
-              <div class="">
-                <TopBar />
-              </div>
-              <div class="">
-                <Router>
-                  <Dashboard path="/dashboard" />
-                  <Projects path="/dashboard/projects" />
-                  {/*<Page404 path="/dashboard/*" default />*/}
-                </Router>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+        <SkylaxContext.Provider
+          value={{
+            isLogin,
+            setIsLogin,
+            userInfo,
+            setUserInfo,
+            supabase,
+            connectionStatus,
+            setConnectionStatus,
+            isShowSideBarMenu,
+            setIsShowSideBarMenu,
+          }}
+        >
+          <Container fluid className="">
+            <Row>
+              <Col lg={2}>
+                <SideBar />
+                <SideBarOffCanvas />
+              </Col>
+              <Col xs={12} md={12} lg={10}>
+                <div class="">
+                  <TopBar />
+                </div>
+                <div class="">
+                  <Router>
+                    <Dashboard path="/dashboard" />
+                    <Projects path="/dashboard/projects" />
+                    {/*<Page404 path="/dashboard/*" default />*/}
+                  </Router>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </SkylaxContext.Provider>
       ) : (
         <>
           <Router>
@@ -105,6 +105,6 @@ export function App() {
           </Router>
         </>
       )}
-    </SkylaxContext.Provider>
+    </>
   );
 }

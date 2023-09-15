@@ -4,12 +4,17 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloudOffIcon from "@mui/icons-material/CloudOff";
 import CloudIcon from "@mui/icons-material/Cloud";
+import MenuIcon from "@mui/icons-material/Menu";
 import SkylaxContext from "../../../Context/Context.jsx";
 import { useContext } from "preact/hooks";
+import { getCurrentUrl } from "preact-router";
 
 export default function TopBar() {
+  const location = getCurrentUrl();
   const siteContext = useContext(SkylaxContext);
-  console.log(siteContext);
+  const showMenuHandler = () => {
+    siteContext.setIsShowSideBarMenu(true);
+  };
 
   return (
     <div className="pt-3">
@@ -23,7 +28,7 @@ export default function TopBar() {
             )}
           </Col>
           <Col className="d-flex justify-content-end align-items-center">
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-3">
               <a
                 href="/dashboard/profile"
                 class="text-decoration-none text-white"
@@ -52,6 +57,13 @@ export default function TopBar() {
                   <CloudOffIcon className="text-danger" />
                 )}
               </a>
+              <button
+                // href="/dashboard/connection"
+                class="btn bg-transparent p-0 text-white d-block d-lg-none"
+                onClick={() => showMenuHandler()}
+              >
+                <MenuIcon />
+              </button>
             </div>
           </Col>
         </Row>
