@@ -1,0 +1,13 @@
+.sideBarContainer{
+    height: calc(100vh - 35px) !important;
+}
+.sideBarLink{
+    transition: all 0.3s linear;
+}
+
+.sideBarLink:hover{
+    background-color: #e12c6c !important;
+}
+.sideBarLinkActive{
+    background-color: #e12c6c !important;
+}
