@@ -60,6 +60,9 @@ export function App() {
       {location.includes("dashboard") ? (
         <Container fluid className="p-2">
           <Row>
+            <Col xs={12} md={3} lg={2}>
+              <SideBar />
+            </Col>
             <Col xs={12} md={9} lg={10}>
               <div class="">
                 <TopBar />
@@ -71,9 +74,6 @@ export function App() {
                   <Page404 path="/*" default />
                 </Router>
               </div>
-            </Col>
-            <Col xs={12} md={3} lg={2}>
-              <SideBar />
             </Col>
           </Row>
         </Container>
