@@ -1,0 +1,15 @@
+.loginContainer {
+    background: url("../../../public/img/login.jpg") no-repeat center center;
+    background-size: cover;
+}
+.loginInput{
+    width: 30rem;
+    max-width: 20rem;
+    background-color: #fff !important;
+}
+.loginInput:focus{
+    background-color: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}

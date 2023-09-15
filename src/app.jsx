@@ -30,7 +30,7 @@ export function App() {
 
   useEffect(() => {
     getAllProjects();
-    console.log(projects);
+    // console.log(projects);
   }, []);
 
   const getAllProjects = async () => {
