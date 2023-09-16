@@ -26,7 +26,7 @@ export default function LiveBoxes() {
   }, []);
   return (
     <>
-      <Row className="p-2">
+      <Row className="p-2 mb-3">
         <LiveBox
           link="/dashboard/projects"
           title="Projects"

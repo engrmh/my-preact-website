@@ -9,7 +9,7 @@ export default function LiveBox({
   children,
 }) {
   return (
-    <Col xs={12} md={3} lg={3} className="mt-4">
+    <Col xs={12} md={3} lg={3} className="mt-4 mb-4 mb-lg-0">
       <a
         href={link}
         class={`setShadow liveBox bg-white p-2 d-flex justify-content-between align-items-center rounded text-decoration-none text-black ${containerClass}`}
