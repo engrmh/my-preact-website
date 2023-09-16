@@ -4,7 +4,7 @@ export default function NewChart({ chartType, chartData, chartKey }) {
   if (chartType === "line") {
     return (
       <>
-        <div class="px-1 overflow-hidden">
+        <div class="px-1 overflow-hidden mb-2" style={{ zIndex: "2" }}>
           <div className="w-100 h-75 overflow-auto">
             <CChart
               type={chartType}
@@ -31,10 +31,10 @@ export default function NewChart({ chartType, chartData, chartKey }) {
               }}
               options={{
                 responsive: true,
-                layout: {
-                  autoPadding: true,
-                  padding: "3px",
-                },
+                // layout: {
+                //   autoPadding: true,
+                //   padding: "3px",
+                // },
                 animations: {
                   tension: {
                     duration: 1000,
@@ -104,10 +104,10 @@ export default function NewChart({ chartType, chartData, chartKey }) {
             }}
             options={{
               responsive: true,
-              layout: {
-                autoPadding: true,
-                padding: "3px",
-              },
+              // layout: {
+              //   autoPadding: true,
+              //   padding: "3px",
+              // },
               animations: {
                 tension: {
                   duration: 1000,

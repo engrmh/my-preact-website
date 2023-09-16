@@ -7,7 +7,7 @@
     transition: all 0.3s ease-in-out;
 }
 .liveBox:hover{
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important;
 }
 .liveBoxIcon{
     transform: translateY(-25px);

@@ -19,7 +19,7 @@ export default function TopBar() {
   return (
     <div className="pt-3">
       <div class="bg-dark rounded">
-        <Row className="justify-content-between p-2">
+        <Row className="justify-content-between p-3">
           <Col className="text-white">
             {siteContext.connectionStatus ? (
               "Dashboard"

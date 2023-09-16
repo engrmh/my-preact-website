@@ -74,14 +74,16 @@ export function App() {
           <Container fluid className="">
             <Row>
               <Col lg={2}>
-                <SideBar />
+                <div class="position-sticky top-0">
+                  <SideBar />
+                </div>
                 <SideBarOffCanvas />
               </Col>
               <Col xs={12} md={12} lg={10}>
-                <div class="">
+                <div class="position-sticky top-0" style={{ zIndex: "1000" }}>
                   <TopBar />
                 </div>
-                <div class="">
+                <div class="pb-5">
                   <Router>
                     <Dashboard path="/dashboard" />
                     <Projects path="/dashboard/projects" />

@@ -9,7 +9,7 @@ export default function Charts() {
           chartClass="customRed"
           // chartData={}
           // chartKey={}
-          chartType="bar"
+          chartType="line"
           title="Projects"
           desc="Count of Done Project/Monthly"
           updatedAt="Updated 3 Days Ago"
@@ -19,17 +19,17 @@ export default function Charts() {
           // chartData={}
           // chartKey={}
           chartType="bar"
-          title="Projects"
-          desc="Count of Done Project/Monthly"
+          title="Views"
+          desc="Website views performance"
           updatedAt="Updated 3 Days Ago"
         />
         <Chart
           chartClass="customBlack"
           // chartData={}
           // chartKey={}
-          chartType="bar"
-          title="Projects"
-          desc="Count of Done Project/Monthly"
+          chartType="line"
+          title="Tasks"
+          desc="Count of Done Tasks/Weekly"
           updatedAt="Updated 30 Min Ago"
         />
       </Row>

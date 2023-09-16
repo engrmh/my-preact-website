@@ -14,13 +14,13 @@ export default function Chart({
   chartKey,
 }) {
   return (
-    <Col xs={12} md={4} lg={4} className="mt-4">
+    <Col xs={12} md={4} lg={4} className="mt-4 mb-3 mb-lg-0">
       <div
         class={`setShadow bg-white p-2 d-flex flex-column justify-content-center align-items-center rounded text-decoration-none text-black ${containerClass}`}
       >
         <div className={`chartContainer rounded ${chartClass}`}>
           <NewChart
-            chartType={"line"}
+            chartType={chartType}
             chartData={chartData}
             chartKey={chartKey}
           />

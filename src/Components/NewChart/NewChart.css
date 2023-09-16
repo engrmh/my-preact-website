@@ -18,13 +18,19 @@ canvas{
 }
 @media screen and (min-width: 400px) and (max-width: 720px) {
     .chart-wrapper{
-        width: 15rem;
+        width: 20rem;
     }
 }
 
-@media screen and (min-width: 721px) and (max-width: 1280px) {
+@media screen and (min-width: 721px) and (max-width: 1050px) {
     .chart-wrapper{
         width: 12rem;
+    }
+}
+
+@media screen and (min-width: 1051px) and (max-width: 1280px) {
+    .chart-wrapper{
+        width: 17rem;
     }
 }
 
