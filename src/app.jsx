@@ -17,6 +17,11 @@ import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
 import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
 import { toast } from "react-toastify";
 import SideBarOffCanvas from "./Components/PanelAdmin/SideBar/SideBarOffCanvas/SideBarOffCanvas.jsx";
+import Users from "./Pages/Dashboard/Users/Users.jsx";
+import Notifications from "./Pages/Dashboard/Notifications/Notifications.jsx";
+import Analytics from "./Pages/Dashboard/Analytics/Analytics.jsx";
+import Tasks from "./Pages/Dashboard/Tasks/Tasks.jsx";
+import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask.jsx";
 
 export function App() {
   const location = getCurrentUrl();
@@ -87,6 +92,11 @@ export function App() {
                   <Router>
                     <Dashboard path="/dashboard" />
                     <Projects path="/dashboard/projects" />
+                    <Users path="/dashboard/users" />
+                    <Notifications path="/dashboard/notifs" />
+                    <Analytics path="/dashboard/analytics" />
+                    <Tasks path="/dashboard/tasks" />
+                    <CurrentTask path="/dashboard/currentTask/:id" />
                     {/*<Page404 path="/dashboard/*" default />*/}
                   </Router>
                 </div>

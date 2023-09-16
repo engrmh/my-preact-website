@@ -21,9 +21,12 @@ export default function TaskSection() {
               <Button className="p-1 customGreen border-0">
                 <DoneIcon />
               </Button>
-              <Button className="p-1 bg-info border-0">
+              <a
+                href={`/dashboard/currentTask/1`}
+                className="p-1 bg-info rounded text-white"
+              >
                 <RemoveRedEyeIcon />
-              </Button>
+              </a>
             </div>
           </div>
         </div>
