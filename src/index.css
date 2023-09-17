@@ -48,3 +48,20 @@ body{
 .customBlue{
   background-color: #1f7cf2 !important;
 }
+
+.customBlackHover:hover{
+  box-shadow: inset 20px 20px 60px #333239,
+  inset -20px -20px 60px #000;
+}
+.customRedHover:hover{
+  box-shadow: inset 20px 20px 60px #e12c6c,
+  inset -20px -20px 60px #000;
+}
+.customGreenHover:hover{
+  box-shadow: inset 20px 20px 60px #5eb860,
+  inset -20px -20px 60px #000;
+}
+.customBlueHover:hover{
+  box-shadow: inset 20px 20px 60px #1f7cf2,
+  inset -20px -20px 60px #000;
+}
