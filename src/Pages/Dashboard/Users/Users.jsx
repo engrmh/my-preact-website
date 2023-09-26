@@ -5,6 +5,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SmsIcon from "@mui/icons-material/Sms";
 
 export default function Users() {
   const columns = [
@@ -40,13 +41,16 @@ export default function Users() {
       headerName: "Actions",
       // description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 170,
+      width: 200,
       renderCell: (params) => {
         return (
           <div>
             <div class="d-flex gap-1">
               <Button className="customBlue p-1 border-0">
                 <VisibilityIcon />
+              </Button>
+              <Button className="customBlack p-1 border-0">
+                <SmsIcon />
               </Button>
               <Button className="customGreen p-1 border-0">
                 <EditIcon />
@@ -64,31 +68,31 @@ export default function Users() {
     },
   ];
 
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     name: "Mohammad Hosein Salim Bahrami",
-  //     email: "johndoe@gmail.com",
-  //     phone: "09119193807",
-  //     userRol: "admin",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "John Doe",
-  //     email: "johndoe@gmail.com",
-  //     phone: "09119193807",
-  //     userRol: "admin",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "John Doe",
-  //     email: "johndoe@gmail.com",
-  //     phone: "09119193807",
-  //     userRol: "admin",
-  //   },
-  // ];
+  const rows = [
+    {
+      id: 1,
+      name: "Mohammad Hosein Salim Bahrami",
+      email: "johndoe@gmail.com",
+      phone: "09119193807",
+      userRol: "admin",
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      phone: "09119193807",
+      userRol: "admin",
+    },
+    {
+      id: 3,
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      phone: "09119193807",
+      userRol: "admin",
+    },
+  ];
 
-  const rows = [];
+  // const rows = [];
 
   return (
     <Row className="mt-4">
