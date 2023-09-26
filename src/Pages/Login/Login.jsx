@@ -55,6 +55,7 @@ export default function Login() {
           >
             <input
               type="email"
+              inputMode="email"
               className="loginInput border-0 rounded bg-white p-2 mb-2"
               placeholder="Email"
               {...register("email", {
