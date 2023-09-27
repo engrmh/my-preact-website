@@ -122,7 +122,7 @@ export default function SideBarOffCanvas() {
                 href="/dashboard/tasks"
                 onClick={() => {
                   handleClose();
-                  setActiveMenu("task");
+                  setActiveMenu("tasks");
                 }}
                 className={
                   activeMenu === "tasks"

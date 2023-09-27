@@ -86,7 +86,7 @@ export default function SideBar() {
             </a>
             <a
               href="/dashboard/tasks"
-              onClick={() => setActiveMenu("task")}
+              onClick={() => setActiveMenu("tasks")}
               className={
                 activeMenu === "tasks"
                   ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
