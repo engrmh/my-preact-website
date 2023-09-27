@@ -68,31 +68,31 @@ export default function Users() {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      name: "Mohammad Hosein Salim Bahrami",
-      email: "johndoe@gmail.com",
-      phone: "09119193807",
-      userRol: "admin",
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      phone: "09119193807",
-      userRol: "admin",
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-      phone: "09119193807",
-      userRol: "admin",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     name: "Mohammad Hosein Salim Bahrami",
+  //     email: "johndoe@gmail.com",
+  //     phone: "09119193807",
+  //     userRol: "admin",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "John Doe",
+  //     email: "johndoe@gmail.com",
+  //     phone: "09119193807",
+  //     userRol: "admin",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "John Doe",
+  //     email: "johndoe@gmail.com",
+  //     phone: "09119193807",
+  //     userRol: "admin",
+  //   },
+  // ];
 
-  // const rows = [];
+  const rows = [];
 
   return (
     <Row className="mt-4">
@@ -122,7 +122,7 @@ export default function Users() {
                     },
                   }}
                   pageSizeOptions={[6]}
-                  checkboxSelection
+                  // checkboxSelection
                   disableRowSelectionOnClick
                 />
               </Box>
