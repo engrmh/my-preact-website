@@ -23,6 +23,7 @@
     "gsap": "^3.12.2",
     "lodash": "^4.17.21",
     "preact": "^10.13.2",
+    "preact-context": "^1.1.4",
     "preact-redux": "^2.1.0",
     "preact-router": "^4.1.1",
     "react-bootstrap": "^2.8.0",
