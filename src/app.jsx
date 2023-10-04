@@ -37,12 +37,12 @@ export function App() {
 
   useEffect(() => {
     getAllProjects();
-    // console.log(projects);
+    console.log(projects);
     // console.log(isShowSideBarMenu);
   }, []);
 
   const getAllProjects = async () => {
-    const { data } = await supabase.from("projects").select("*");
+    const { data: users, error } = await supabase.from("users").select("*");
     await setProjects(data);
   };
 

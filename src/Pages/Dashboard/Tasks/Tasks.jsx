@@ -32,7 +32,6 @@ export default function Tasks() {
       width: 100,
       editable: false,
       renderCell: (params) => {
-        console.log(params.value);
         if (params.value === "completed") {
           return <span className="text-success">{params.value}</span>;
         } else if (params.value === "progress") {

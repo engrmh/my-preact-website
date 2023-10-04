@@ -35,7 +35,6 @@ export default function Users() {
       width: 120,
       editable: false,
       renderCell: (params) => {
-        console.log(params.value);
         if (params.value === "sent") {
           return <span className="text-success">{params.value}</span>;
         } else if (params.value === "progress") {
