@@ -1,6 +1,6 @@
-const addProject = "ADD_ROJECT";
-const removeProject = "REMOVE_ROJECT";
-const editProject = "EDIT_ROJECT";
+const addProject = "ADD_PROJECT";
+const removeProject = "REMOVE_PROJECT";
+const editProject = "EDIT_PROJECT";
 const projectReducer = (state = [], action) => {
   switch (action.type) {
     case addProject:

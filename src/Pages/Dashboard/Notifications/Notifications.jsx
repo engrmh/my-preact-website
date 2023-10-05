@@ -57,13 +57,13 @@ export default function Users() {
               <Button className="customBlue p-1 border-0">
                 <VisibilityIcon />
               </Button>
-              <Button className="customBlack p-1 border-0">
-                <SendIcon />
-              </Button>
+              {/*<Button className="customBlack p-1 border-0">*/}
+              {/*  <SendIcon />*/}
+              {/*</Button>*/}
               <Button className="customGreen p-1 border-0" disabled>
                 <EditIcon />
               </Button>
-              <Button className="customBlack p-1 border-0">
+              <Button className="customBlack p-1 border-0" disabled>
                 <ContentCopyIcon />
               </Button>
               <Button className="customRed p-1 border-0">
