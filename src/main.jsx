@@ -2,7 +2,7 @@ import { render } from "preact";
 import { App } from "./app.jsx";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Provider } from "preact-redux";
+import { Provider } from "react-redux";
 import store from "./Redux/store";
 
 render(

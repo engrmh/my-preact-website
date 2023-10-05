@@ -1,7 +1,12 @@
+import { combineReducers, legacy_createStore } from "redux";
 import taskReducer from "./Stores/Tasks";
-import { createStore, combineReducers } from "redux";
+import userReducer from "./Stores/Users.jsx";
 
-// const store = createStore(rootReducers);
-const store = createStore(taskReducer);
+const store = legacy_createStore(
+  combineReducers({
+    taskReducer,
+    userReducer,
+  })
+);
 
 export default store;

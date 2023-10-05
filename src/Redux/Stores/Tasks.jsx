@@ -18,7 +18,7 @@ const taskReducer = (state = [], action) => {
       return newTask;
     }
     default:
-      state;
+      return state;
   }
 };
 
