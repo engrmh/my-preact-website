@@ -23,6 +23,7 @@ import Analytics from "./Pages/Dashboard/Analytics/Analytics.jsx";
 import Tasks from "./Pages/Dashboard/Tasks/Tasks.jsx";
 import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask.jsx";
 import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts.jsx";
+import Profile from "./Pages/Dashboard/Profile/Profile.jsx";
 
 export function App() {
   const location = getCurrentUrl();
@@ -99,6 +100,7 @@ export function App() {
                     <Tasks path="/dashboard/tasks" />
                     <CurrentTask path="/dashboard/currentTask/:id" />
                     <ShortCuts path="/dashboard/shortcuts" />
+                    <Profile path="/dashboard/profile" />
                     {/*<Page404 path="/dashboard/*" default />*/}
                   </Router>
                 </div>
