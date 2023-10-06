@@ -4,6 +4,7 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import GroupIcon from "@mui/icons-material/Group";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
+import ShortcutIcon from "@mui/icons-material/Shortcut";
 import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirectionRToL";
 import TaskIcon from "@mui/icons-material/Task";
 import { useContext, useEffect, useState } from "preact/hooks";
@@ -95,6 +96,18 @@ export default function SideBar() {
             >
               <TaskIcon />
               <span className="text-white">Tasks</span>
+            </a>
+            <a
+              href="/dashboard/shortcuts"
+              onClick={() => setActiveMenu("shortcuts")}
+              className={
+                activeMenu === "shortcuts"
+                  ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                  : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+              }
+            >
+              <ShortcutIcon />
+              <span className="text-white">Shortcuts</span>
             </a>
             <a
               // href="/dashboard"

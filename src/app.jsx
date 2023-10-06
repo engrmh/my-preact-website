@@ -22,6 +22,7 @@ import Notifications from "./Pages/Dashboard/Notifications/Notifications.jsx";
 import Analytics from "./Pages/Dashboard/Analytics/Analytics.jsx";
 import Tasks from "./Pages/Dashboard/Tasks/Tasks.jsx";
 import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask.jsx";
+import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts.jsx";
 
 export function App() {
   const location = getCurrentUrl();
@@ -97,6 +98,7 @@ export function App() {
                     <Analytics path="/dashboard/analytics" />
                     <Tasks path="/dashboard/tasks" />
                     <CurrentTask path="/dashboard/currentTask/:id" />
+                    <ShortCuts path="/dashboard/shortcuts" />
                     {/*<Page404 path="/dashboard/*" default />*/}
                   </Router>
                 </div>

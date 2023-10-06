@@ -9,6 +9,7 @@ import TaskIcon from "@mui/icons-material/Task";
 import { Offcanvas } from "react-bootstrap";
 import { useContext, useEffect, useState } from "preact/hooks";
 import SkylaxContext from "../../../../Context/Context.jsx";
+import ShortcutIcon from "@mui/icons-material/Shortcut";
 
 export default function SideBarOffCanvas() {
   const siteContext = useContext(SkylaxContext);
@@ -132,6 +133,18 @@ export default function SideBarOffCanvas() {
               >
                 <TaskIcon />
                 <span className="text-white">Tasks</span>
+              </a>
+              <a
+                href="/dashboard/shortcuts"
+                onClick={() => setActiveMenu("shortcuts")}
+                className={
+                  activeMenu === "shortcuts"
+                    ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                    : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+                }
+              >
+                <ShortcutIcon />
+                <span className="text-white">Shortcuts</span>
               </a>
               <a
                 // href="/dashboard"
