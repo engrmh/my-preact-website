@@ -16,6 +16,9 @@ export default function AddingModal({
     sendCloseData(isShowingModal);
   }, [isShowingModal]);
 
+  const submitHandler = () => {
+    onSubmitingData(true);
+  };
   return (
     <div
       className="modal show"
@@ -36,11 +39,11 @@ export default function AddingModal({
             Close
           </Button>
           {modalType === "add" || modalType === "edit" ? (
-            <Button className="customBlue text-white" onSubmitingData={true}>
+            <Button className="customBlue text-white" onClick={submitHandler}>
               Save changes
             </Button>
           ) : (
-            <Button className="customRed text-white" onSubmitingData={true}>
+            <Button className="customRed text-white" onClick={submitHandler}>
               Sure
             </Button>
           )}
