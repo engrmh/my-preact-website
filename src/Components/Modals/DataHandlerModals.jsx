@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "preact/hooks";
 
-export default function AddingModal({
+export default function DataHandlerModals({
   showStatus,
   dataTransfer,
   sendCloseData,
@@ -16,6 +16,10 @@ export default function AddingModal({
     sendCloseData(isShowingModal);
   }, [isShowingModal]);
 
+  useEffect(() => {
+    setIsShowingModal(showStatus);
+  }, [showStatus]);
+
   const submitHandler = () => {
     onSubmitingData(true);
   };
@@ -24,26 +28,36 @@ export default function AddingModal({
       className="modal show"
       style={{ display: "block", position: "initial" }}
     >
-      <Modal show={isShowingModal} onHide={() => setIsShowingModal(false)}>
-        <Modal.Header closeButton>
+      <Modal
+        show={isShowingModal}
+        onHide={() => setIsShowingModal(false)}
+        className=""
+      >
+        <Modal.Header className="customBlack text-white border-0" closeButton>
           <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>{children}</Modal.Body>
+        <Modal.Body className="customBlack text-white">{children}</Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-between align-items-center customBlack text-white border-0">
           <Button
-            className="customBlack text-white"
+            className="bg-black text-white border-0"
             onClick={() => setIsShowingModal(false)}
           >
             Close
           </Button>
           {modalType === "add" || modalType === "edit" ? (
-            <Button className="customBlue text-white" onClick={submitHandler}>
+            <Button
+              className="customBlue text-white border-0"
+              onClick={submitHandler}
+            >
               Save changes
             </Button>
           ) : (
-            <Button className="customRed text-white" onClick={submitHandler}>
+            <Button
+              className="customRed text-white border-0"
+              onClick={submitHandler}
+            >
               Sure
             </Button>
           )}

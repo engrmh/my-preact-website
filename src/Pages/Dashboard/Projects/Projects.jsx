@@ -1,8 +1,31 @@
 import { Alert, Button, Col, Row } from "react-bootstrap";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import { useState, useEffect } from "preact/hooks";
+import DataHandlerModals from "../../../Components/Modals/DataHandlerModals.jsx";
+import { useDispatch } from "react-redux";
+import { addProjectAction } from "../../../Redux/Stores/Projects.jsx";
+import AbcIcon from "@mui/icons-material/Abc";
+import PersonIcon from "@mui/icons-material/Person";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 
 export default function Projects() {
+  const [allProjects, setAllProjects] = useState([]);
+  const [openingModal, setOpeningModal] = useState(false);
+  const [typeOfModal, setTypeOfModal] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+        .then((res) => res.json())
+        .then((data) => setAllProjects(data));
+    };
+  }, []);
+
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -42,56 +65,124 @@ export default function Projects() {
     },
   ];
 
-  // const rows = [
-  //   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  //   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  // ];
+  const rows = allProjects;
 
-  const rows = [];
+  const modalStatusHandler = (status) => {
+    setOpeningModal(status);
+  };
+
+  const submitHandler = (action) => {
+    if (action) {
+      dispatch(addProjectAction());
+    }
+  };
 
   return (
-    <Row className="mt-4">
-      <Col xs={12} md={12} lg={12}>
-        <div class="">
-          <div class="p-3 d-flex justify-content-between align-items-center setShadow rounded bg-white mb-3">
-            <span className="fs-5">Projects</span>
-            <Button className="p-2 customBlue customBlueHover border-0">
-              Add New Project
-            </Button>
-          </div>
-          <div class="p-3 setShadow rounded bg-white">
-            {rows.length === 0 ? (
-              <Alert variant="warning" className="text-center">
-                No Project Found. Please Add New Project
-              </Alert>
-            ) : (
-              <Box sx={{ height: 400, width: "100%" }}>
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  initialState={{
-                    pagination: {
-                      paginationModel: {
-                        pageSize: 6,
+    <>
+      <Row className="mt-4">
+        <Col xs={12} md={12} lg={12}>
+          <div class="">
+            <div class="p-3 d-flex justify-content-between align-items-center setShadow rounded bg-white mb-3">
+              <span className="fs-5">Projects</span>
+              <Button
+                className="p-2 customBlue customBlueHover border-0"
+                onClick={() => {
+                  setOpeningModal(true);
+                  setTypeOfModal("add");
+                }}
+              >
+                Add New Project
+              </Button>
+            </div>
+            <div class="p-3 setShadow rounded bg-white">
+              {rows.length === 0 ? (
+                <Alert variant="warning" className="text-center">
+                  No Project Found. Please Add New Project
+                </Alert>
+              ) : (
+                <Box sx={{ height: 400, width: "100%" }}>
+                  <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    initialState={{
+                      pagination: {
+                        paginationModel: {
+                          pageSize: 6,
+                        },
                       },
-                    },
-                  }}
-                  pageSizeOptions={[6]}
-                  checkboxSelection
-                  disableRowSelectionOnClick
-                />
-              </Box>
-            )}
+                    }}
+                    pageSizeOptions={[6]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                  />
+                </Box>
+              )}
+            </div>
           </div>
-        </div>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+      {openingModal && (
+        <DataHandlerModals
+          modalTitle="Add New Project"
+          modalType={typeOfModal}
+          showStatus={openingModal}
+          sendCloseData={(modalStatus) => modalStatusHandler(modalStatus)}
+          onSubmitingData={(action) => submitHandler(action)}
+        >
+          <div class="d-flex flex-column gap-2">
+            <div class="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <AbcIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+              <input
+                type="text"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Ppoject Name"
+              />
+            </div>
+            <div class="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <PersonIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+              <input
+                type="text"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Customer"
+              />
+            </div>
+            <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <MonetizationOnIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+              <input
+                type="number"
+                inputMode="numeric"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Salary"
+              />
+            </div>
+            <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <AutoFixHighIcon className="me-2 fs-2 customRed text-white rounded-circle p-1 " />
+              <input
+                type="text"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Ppoject Technologies (Use , to separate)"
+              />
+            </div>
+            <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <EngineeringIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+              <input
+                type="text"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Creator"
+              />
+            </div>
+            <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+              <InsertPhotoIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+              <input
+                type="file"
+                className="border-0 bg-transparent p-1 w-100 systemInput"
+                placeholder="Ppoject Photo"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </div>
+          </div>
+        </DataHandlerModals>
+      )}
+    </>
   );
 }
