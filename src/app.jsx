@@ -32,21 +32,11 @@ export function App() {
   const [projects, setProjects] = useState([]);
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
-  const supabase = createClient(
-    "https://ujrsoyxcmijpfnzctkok.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVqcnNveXhjbWlqcGZuemN0a29rIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQ3MjI4ODIsImV4cCI6MjAxMDI5ODg4Mn0.ZK2RZzNPPH_OgmTdp2tcmJgCMyWhwNxwvGqJ2W69l8Q"
-  );
 
   useEffect(() => {
-    getAllProjects();
     console.log(projects);
     // console.log(isShowSideBarMenu);
   }, []);
-
-  const getAllProjects = async () => {
-    const { data: users, error } = await supabase.from("users").select("*");
-    await setProjects(data);
-  };
 
   window.addEventListener("keydown", (e) => {
     if (e.keyCode === 76) {
@@ -71,7 +61,6 @@ export function App() {
             setIsLogin,
             userInfo,
             setUserInfo,
-            supabase,
             connectionStatus,
             setConnectionStatus,
             isShowSideBarMenu,

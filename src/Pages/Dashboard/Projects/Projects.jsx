@@ -19,12 +19,14 @@ export default function Projects() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return () => {
-      fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
-        .then((res) => res.json())
-        .then((data) => setAllProjects(data));
-    };
+    getAllProjectFromServer();
   }, []);
+
+  const getAllProjectFromServer = () => {
+    fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+      .then((res) => res.json())
+      .then((data) => setAllProjects(data));
+  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -74,6 +76,7 @@ export default function Projects() {
   const submitHandler = (action) => {
     if (action) {
       dispatch(addProjectAction());
+      getAllProjectFromServer();
     }
   };
 

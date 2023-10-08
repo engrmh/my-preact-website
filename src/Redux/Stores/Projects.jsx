@@ -21,14 +21,17 @@ const projectReducer = (state = [], action) => {
   }
 };
 
-export const addProjectAction = (title, desc, basedOn) => {
+export const addProjectAction = (data) => {
   return {
     type: addProject,
     payload: {
       id: crypto.randomUUID(),
-      title,
-      desc,
-      basedOn,
+      name: data.name,
+      customer: data.customer,
+      salary: data.salary,
+      projectTechnologies: data.projectTechnologies,
+      creator: data.creator,
+      image: data.image,
     },
   };
 };
