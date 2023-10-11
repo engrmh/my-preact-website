@@ -9,7 +9,6 @@ import Portfolio from "./Pages/Portfolio/Portfolio.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Projects from "./Pages/Dashboard/Projects/Projects.jsx";
 import { useEffect, useState } from "preact/hooks";
-import { createClient } from "@supabase/supabase-js";
 import SkylaxContext from "./Context/Context.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import { Col, Container, Row } from "react-bootstrap";
@@ -34,7 +33,7 @@ export function App() {
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
 
   useEffect(() => {
-    console.log(projects);
+    // console.log(projects);
     // console.log(isShowSideBarMenu);
   }, []);
 

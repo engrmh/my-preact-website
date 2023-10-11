@@ -16,6 +16,14 @@ export default function Projects() {
   const [allProjects, setAllProjects] = useState([]);
   const [openingModal, setOpeningModal] = useState(false);
   const [typeOfModal, setTypeOfModal] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [salary, setSalary] = useState(null);
+  const [projectTechnologies, setProjectTechnologies] = useState("");
+  const [creator, setCreator] = useState("");
+  const [projectPhoto, setProjectPhoto] = useState(
+    "https://picsum.photos/seed/picsum/200/300"
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,8 +58,8 @@ export default function Projects() {
       editable: true,
     },
     {
-      field: "projectType",
-      headerName: "Project Type",
+      field: "projectTechnologies",
+      headerName: "Technologies",
       type: "number",
       width: 110,
       editable: true,
@@ -75,8 +83,22 @@ export default function Projects() {
 
   const submitHandler = (action) => {
     if (action) {
-      dispatch(addProjectAction());
+      let newProject = {
+        name,
+        customer,
+        salary,
+        projectTechnologies,
+        creator,
+        image: projectPhoto,
+      };
+      dispatch(addProjectAction(newProject));
       getAllProjectFromServer();
+      setProjectName("");
+      setCustomer("");
+      setSalary(0);
+      setProjectTechnologies("");
+      setCreator("");
+      setProjectPhoto("");
     }
   };
 
@@ -139,6 +161,8 @@ export default function Projects() {
                 type="text"
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Ppoject Name"
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
               />
             </div>
             <div class="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
@@ -147,6 +171,8 @@ export default function Projects() {
                 type="text"
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Customer"
+                value={customer}
+                onChange={(e) => setCustomer(e.target.value)}
               />
             </div>
             <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
@@ -156,6 +182,8 @@ export default function Projects() {
                 inputMode="numeric"
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Salary"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}
               />
             </div>
             <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
@@ -164,6 +192,8 @@ export default function Projects() {
                 type="text"
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Ppoject Technologies (Use , to separate)"
+                value={projectTechnologies}
+                onChange={(e) => setProjectTechnologies(e.target.value)}
               />
             </div>
             <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
@@ -172,6 +202,8 @@ export default function Projects() {
                 type="text"
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Creator"
+                value={creator}
+                onChange={(e) => setCreator(e.target.value)}
               />
             </div>
             <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
@@ -181,6 +213,8 @@ export default function Projects() {
                 className="border-0 bg-transparent p-1 w-100 systemInput"
                 placeholder="Ppoject Photo"
                 accept="image/png, image/jpeg, image/jpg"
+                value={projectPhoto}
+                onChange={(e) => setProjectPhoto(e.target.value)}
               />
             </div>
           </div>

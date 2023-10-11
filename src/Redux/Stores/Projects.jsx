@@ -1,10 +1,20 @@
 const addProject = "ADD_PROJECT";
 const removeProject = "REMOVE_PROJECT";
 const editProject = "EDIT_PROJECT";
+const getAllProject = "GET_ALL_PROJECT";
 const projectReducer = (state = [], action) => {
   switch (action.type) {
-    case addProject:
-      return [...state, action.payload];
+    case addProject: {
+      return fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(action.payload),
+      }).then((res) => res.json());
+
+      // return [...state, action.payload];
+    }
     case removeProject:
       return [...state].filter((project) => project.id !== action.id);
     case editProject: {
@@ -19,6 +29,12 @@ const projectReducer = (state = [], action) => {
     default:
       return state;
   }
+};
+
+export const getAllProjectAction = () => {
+  return {
+    type: removeProject,
+  };
 };
 
 export const addProjectAction = (data) => {
