@@ -1,67 +1,51 @@
-const addProject = "ADD_PROJECT";
-const removeProject = "REMOVE_PROJECT";
-const editProject = "EDIT_PROJECT";
-const getAllProject = "GET_ALL_PROJECT";
-const projectReducer = (state = [], action) => {
-  switch (action.type) {
-    case addProject: {
-      return fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+export const getAllProjectFromServer = createAsyncThunk(
+  "Projects/getAllProjectFromServer",
+  async () => {
+    return fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+      .then((res) => res.json())
+      .then((data) => data);
+  }
+);
+
+const projectSlice = createSlice({
+  name: "Projects",
+  initialState: [],
+  reducers: {
+    addProject: (state, action) => {
+      fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(action.payload),
-      }).then((res) => res.json());
-
-      // return [...state, action.payload];
-    }
-    case removeProject:
-      return [...state].filter((project) => project.id !== action.id);
-    case editProject: {
-      let currentState = [...state];
-      let newState = currentState.some((project) => {
-        if (project.id === action.payload.id) {
-          project = action.payload;
-        }
-      });
-      return newState;
-    }
-    default:
-      return state;
-  }
-};
-
-export const getAllProjectAction = () => {
-  return {
-    type: removeProject,
-  };
-};
-
-export const addProjectAction = (data) => {
-  return {
-    type: addProject,
-    payload: {
-      id: crypto.randomUUID(),
-      name: data.name,
-      customer: data.customer,
-      salary: data.salary,
-      projectTechnologies: data.projectTechnologies,
-      creator: data.creator,
-      image: data.image,
+      })
+        .then((res) => res.json())
+        .then((data) => data);
     },
-  };
-};
-export const removeProjectAction = (id) => {
-  return {
-    type: removeProject,
-    id,
-  };
-};
-export const editProjectAction = (id) => {
-  return {
-    type: editProject,
-    id,
-  };
-};
+    removeProject: (state, action) => {
+      fetch(`https://apptest.bashiridev.ir/api/Projects/DeleteProject`, {
+        method: "DELETE",
+        body: JSON.stringify(action.payload),
+      })
+        .then((res) => res.json())
+        .then((data) => data);
+    },
+    editProject: (state, action) => {
+      console.log(action);
+      fetch(`https://apptest.bashiridev.ir/api/Projects/PutProject`, {
+        method: "PUT",
+        body: JSON.stringify(action.payload.data),
+      })
+        .then((res) => res.json())
+        .then((data) => data);
+    },
+  },
+  extraReducers: {
+    [getAllProjectFromServer.fulfilled]: (state, action) => action.payload,
+  },
+});
 
-export default projectReducer;
+export const { addProject, removeProject, editProject } = projectSlice.actions;
+export default projectSlice.reducer;
