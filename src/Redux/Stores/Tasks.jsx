@@ -30,7 +30,9 @@ const taskSlice = createSlice({
         {
           method: "DELETE",
         }
-      ).then((res) => res.json());
+      )
+        .then((res) => res.json())
+        .then((data) => data);
     },
     editTask: (state, action) => {
       fetch(

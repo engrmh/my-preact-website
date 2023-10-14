@@ -25,18 +25,24 @@ const projectSlice = createSlice({
         .then((data) => data);
     },
     removeProject: (state, action) => {
-      fetch(`https://apptest.bashiridev.ir/api/Projects/DeleteProject`, {
-        method: "DELETE",
-        body: JSON.stringify(action.payload),
-      })
+      fetch(
+        `https://apptest.bashiridev.ir/api/Projects/DeleteProject?id=${action.payload.id}`,
+        {
+          method: "DELETE",
+          body: JSON.stringify(action.payload),
+        }
+      )
         .then((res) => res.json())
         .then((data) => data);
     },
     editProject: (state, action) => {
-      fetch(`https://apptest.bashiridev.ir/api/Projects/PutProject`, {
-        method: "PUT",
-        body: JSON.stringify(action.payload.data),
-      })
+      fetch(
+        `https://apptest.bashiridev.ir/api/Projects/PutProject/${action.payload.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(action.payload.data),
+        }
+      )
         .then((res) => res.json())
         .then((data) => data);
     },

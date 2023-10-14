@@ -17,11 +17,10 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-// import DoneIcon from "@mui/icons-material/Done.js";
-import EditIcon from "@mui/icons-material/Edit.js";
-import DeleteIcon from "@mui/icons-material/Delete.js";
+import DescriptionIcon from "@mui/icons-material/Description";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
-
 export default function Projects() {
   const [openingModal, setOpeningModal] = useState(false);
   const [typeOfModal, setTypeOfModal] = useState("");
@@ -30,6 +29,7 @@ export default function Projects() {
   const [salary, setSalary] = useState(null);
   const [projectTechnologies, setProjectTechnologies] = useState("");
   const [creator, setCreator] = useState("");
+  const [projectDesc, setProjectDesc] = useState("");
   const [projectPhoto, setProjectPhoto] = useState(
     "https://picsum.photos/seed/picsum/200/300"
   );
@@ -46,11 +46,18 @@ export default function Projects() {
     projectTechnologies,
     creator,
     image: projectPhoto,
+    description: projectDesc,
   };
 
   useEffect(() => {
     dispatch(getAllProjectFromServer());
+    setAllProjects(allProjectsFormServer);
   }, []);
+
+  useEffect(() => {
+    dispatch(getAllProjectFromServer());
+    setAllProjects(allProjectsFormServer);
+  }, [useSelector((state) => state.projects)]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -58,31 +65,40 @@ export default function Projects() {
       field: "name",
       headerName: "Name",
       width: 150,
-      editable: true,
+      editable: false,
     },
     {
       field: "customer",
       headerName: "Customer",
       width: 150,
-      editable: true,
+      editable: false,
     },
     {
       field: "salary",
       headerName: "Salary",
       type: "number",
       width: 110,
-      editable: true,
+      editable: false,
     },
     {
       field: "projectTechnologies",
       headerName: "Technologies",
       type: "number",
       width: 110,
-      editable: true,
+      editable: false,
     },
     {
       field: "creator",
       headerName: "Creator",
+      // description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      // valueGetter: (params) =>
+      //   `${params.row.firstName || ""} ${params.row.lastName || ""}`,
+    },
+    {
+      field: "description",
+      headerName: "Description",
       // description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 160,
@@ -138,6 +154,7 @@ export default function Projects() {
         setProjectTechnologies("");
         setCreator("");
         setProjectPhoto("");
+        setProjectDesc("");
         setOpeningModal(false);
       }
     }
@@ -155,7 +172,10 @@ export default function Projects() {
         setProjectTechnologies("");
         setCreator("");
         setProjectPhoto("");
+        setProjectDesc("");
         setOpeningModal(false);
+        dispatch(getAllProjectFromServer());
+        Swal.fire("Added Successfully", "", "success");
       }
     }
   };
@@ -164,10 +184,11 @@ export default function Projects() {
     setProjectID(data.row.id);
     setProjectName(data.row.name);
     setCustomer(data.row.customer);
-    setSalary(Number(data.row.salary.toLocaleString()));
+    setSalary(Number(data.row.salary));
     setProjectTechnologies(data.row.projectTechnologies);
     setCreator(data.row.creator);
     setProjectPhoto(data.row.imageName);
+    setProjectDesc(data.row.description);
     setOpeningModal(true);
   };
 
@@ -218,7 +239,7 @@ export default function Projects() {
                   {showAllData ? (
                     <Box sx={{ height: 400, width: "100%" }}>
                       <DataGrid
-                        rows={allProjectsFormServer()}
+                        rows={allProjects}
                         columns={columns}
                         initialState={{
                           pagination: {
@@ -228,7 +249,7 @@ export default function Projects() {
                           },
                         }}
                         pageSizeOptions={[6]}
-                        checkboxSelection
+                        // checkboxSelection
                         disableRowSelectionOnClick
                       />
                     </Box>
@@ -327,6 +348,15 @@ export default function Projects() {
                   accept="image/png, image/jpeg, image/jpg"
                   value={projectPhoto}
                   onChange={(e) => setProjectPhoto(e.target.value)}
+                />
+              </div>
+              <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">
+                <DescriptionIcon className="me-2 fs-2 customRed text-white rounded-circle p-1" />
+                <textarea
+                  className="border-0 bg-transparent p-1 w-100 systemInput"
+                  placeholder="Ppoject Description"
+                  value={projectDesc}
+                  onChange={(e) => setProjectDesc(e.target.value)}
                 />
               </div>
             </div>
