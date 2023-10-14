@@ -37,6 +37,7 @@ export default function Projects() {
   const [showAllData, setShowAllData] = useState(false);
   const dispatch = useDispatch();
   const allProjectsFormServer = useSelector((state) => state.projects);
+  const [allProjects, setAllProjects] = useState(allProjectsFormServer);
 
   let newProject = {
     name: projectName,
@@ -96,13 +97,32 @@ export default function Projects() {
       width: 120,
       renderCell: (params) => {
         return (
-
+          <div>
+            <div className="d-flex gap-1">
+              {/*<Button className="customGreen p-1 border-0">*/}
+              {/*  <DoneIcon />*/}
+              {/*</Button>*/}
+              <Button
+                className="customBlue p-1 border-0"
+                onClick={() => {
+                  editHandler(params);
+                  setTypeOfModal("edit");
+                }}
+              >
+                <EditIcon />
+              </Button>
+              <Button
+                className="customRed p-1 border-0"
+                onClick={() => deleteHandler(params)}
+              >
+                <DeleteIcon />
+              </Button>
+            </div>
+          </div>
         );
       },
     },
   ];
-
-  const rows = allProjectsFormServer;
 
   const modalStatusHandler = (status) => {
     setOpeningModal(status);
@@ -189,7 +209,7 @@ export default function Projects() {
               </Button>
             </div>
             <div className="p-3 setShadow rounded bg-white">
-              {rows.length === 0 ? (
+              {allProjects.length === 0 ? (
                 <Alert variant="warning" className="text-center">
                   No Project Found. Please Add New Project
                 </Alert>
@@ -198,7 +218,7 @@ export default function Projects() {
                   {showAllData ? (
                     <Box sx={{ height: 400, width: "100%" }}>
                       <DataGrid
-                        rows={rows}
+                        rows={allProjectsFormServer()}
                         columns={columns}
                         initialState={{
                           pagination: {
