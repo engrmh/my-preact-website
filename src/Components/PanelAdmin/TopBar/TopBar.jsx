@@ -5,16 +5,36 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloudOffIcon from "@mui/icons-material/CloudOff";
 import CloudIcon from "@mui/icons-material/Cloud";
 import MenuIcon from "@mui/icons-material/Menu";
-import SkylaxContext from "../../../Context/Context.jsx";
-import { useContext } from "preact/hooks";
+import PowerIcon from "@mui/icons-material/Power";
+import PowerOffIcon from "@mui/icons-material/PowerOff";
+import SkylaxContext from "../../../Context/Context";
+import { useContext, useEffect, useState } from "preact/hooks";
 import { getCurrentUrl } from "preact-router";
 
 export default function TopBar() {
   const location = getCurrentUrl();
   const siteContext = useContext(SkylaxContext);
+  const [chargingStatus, setChargingStatus] = useState(false);
+  const [battryLevel, setBattryLevel] = useState(null);
   const showMenuHandler = () => {
     siteContext.setIsShowSideBarMenu(true);
   };
+
+  navigator.getBattery().then((battery) => {
+    setChargingStatus(battery.charging);
+    setBattryLevel(battery.level * 100);
+    navigator.vibrate(200);
+
+    battery.addEventListener("chargingchange", () => {
+      setChargingStatus(battery.charging);
+      setBattryLevel(battery.level * 100);
+      navigator.vibrate(200);
+    });
+  });
+
+  // useEffect(() => {
+  //   console.log(chargingStatus);
+  // }, [chargingStatus]);
 
   return (
     <div className="pt-3">
@@ -56,6 +76,17 @@ export default function TopBar() {
                 ) : (
                   <CloudOffIcon className="text-danger" />
                 )}
+              </a>
+              <a
+                // href="/dashboard/connection"
+                className="text-decoration-none text-white d-flex"
+              >
+                {chargingStatus ? (
+                  <PowerIcon className="text-warning" />
+                ) : (
+                  <PowerOffIcon className="text-danger" />
+                )}
+                <span className="d-none d-md-block">{battryLevel}%</span>
               </a>
               <button
                 // href="/dashboard/connection"
