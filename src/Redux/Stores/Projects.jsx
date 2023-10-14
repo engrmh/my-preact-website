@@ -33,7 +33,6 @@ const projectSlice = createSlice({
         .then((data) => data);
     },
     editProject: (state, action) => {
-      console.log(action);
       fetch(`https://apptest.bashiridev.ir/api/Projects/PutProject`, {
         method: "PUT",
         body: JSON.stringify(action.payload.data),

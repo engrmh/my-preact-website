@@ -28,7 +28,6 @@ export function App() {
   const location = getCurrentUrl();
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
-  const [projects, setProjects] = useState([]);
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
 
@@ -36,12 +35,6 @@ export function App() {
     // console.log(projects);
     // console.log(isShowSideBarMenu);
   }, []);
-
-  window.addEventListener("keydown", (e) => {
-    if (e.keyCode === 76) {
-      route("/login");
-    }
-  });
 
   window.addEventListener("offline", () => {
     setConnectionStatus(false);

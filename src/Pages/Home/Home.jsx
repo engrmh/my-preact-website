@@ -100,7 +100,7 @@ export default function Home() {
             <SocialApp link="https://github.com/engrmh">
               <GitHubIcon className="text-white fs-3 social" />
             </SocialApp>
-            <SocialApp link="/login" classInfo="d-block d-lg-none">
+            <SocialApp link="/login" classInfo="">
               <AccountCircleIcon className="text-white fs-3 social" />
             </SocialApp>
           </div>

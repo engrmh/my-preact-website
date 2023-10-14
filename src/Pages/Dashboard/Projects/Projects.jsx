@@ -96,28 +96,7 @@ export default function Projects() {
       width: 120,
       renderCell: (params) => {
         return (
-          <div>
-            <div class="d-flex gap-1">
-              {/*<Button className="customGreen p-1 border-0">*/}
-              {/*  <DoneIcon />*/}
-              {/*</Button>*/}
-              <Button
-                className="customBlue p-1 border-0"
-                onClick={() => {
-                  editHandler(params);
-                  setTypeOfModal("edit");
-                }}
-              >
-                <EditIcon />
-              </Button>
-              <Button
-                className="customRed p-1 border-0"
-                onClick={() => deleteHandler(params)}
-              >
-                <DeleteIcon />
-              </Button>
-            </div>
-          </div>
+
         );
       },
     },

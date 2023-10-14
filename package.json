@@ -37,6 +37,7 @@
     "react-turnstile": "^1.1.1",
     "redux": "^4.2.1",
     "sweetalert2": "^11.7.32",
+    "toastr": "^2.1.4",
     "typewriter-effect": "^2.20.1"
   },
   "devDependencies": {

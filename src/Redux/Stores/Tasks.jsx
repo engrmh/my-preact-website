@@ -1,49 +1,53 @@
-const addNewTask = "ADD_NEW_TASK";
-const removeTask = "REMOVE_TASK";
-const completeTask = "COMPLETE_TASK";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const taskReducer = (state = [], action) => {
-  switch (action.type) {
-    case addNewTask:
-      return [...state, action.payload];
-    case removeTask:
-      return [...state].filter((task) => task.id !== action.id);
-    case completeTask: {
-      let newTask = [...state];
-      newTask.some((task) => {
-        if (task.id === action.id) {
-          task.isDone = !task.isDone;
-        }
-      });
-      return newTask;
-    }
-    default:
-      return state;
+export const getAllTasksFromServer = createAsyncThunk(
+  "Task/getAllTasksFromServer",
+  async () => {
+    return fetch("https://apptest.bashiridev.ir/api/Task/GetTasks")
+      .then((res) => res.json())
+      .then((data) => data);
   }
-};
+);
 
-export const addNewTaskAction = (title) => {
-  return {
-    type: addNewTask,
-    payload: {
-      id: crypto.randomUUID(),
-      title,
-      isDone: false,
+const taskSlice = createSlice({
+  name: "Task",
+  initialState: [],
+  reducers: {
+    addTask: (state, action) => {
+      fetch("https://apptest.bashiridev.ir/api/Task/PostTask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(action.payload),
+      })
+        .then((res) => res.json())
+        .then((data) => data);
     },
-  };
-};
+    removeTask: (state, action) => {
+      fetch(
+        `https://apptest.bashiridev.ir/api/Task/DeleteTask/${action.payload}`,
+        {
+          method: "DELETE",
+        }
+      ).then((res) => res.json());
+    },
+    editTask: (state, action) => {
+      fetch(
+        `https://apptest.bashiridev.ir/api/Task/PutTask/${action.payload.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(action.payload.data),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => data);
+    },
+  },
+  extraReducers: {
+    [getAllTasksFromServer.fulfilled]: (state, action) => action.payload,
+  },
+});
 
-export const removeTaskAction = (id) => {
-  return {
-    type: removeTask,
-    id,
-  };
-};
-export const completeTaskAction = (id) => {
-  return {
-    type: completeTask,
-    id,
-  };
-};
-
-export default taskReducer;
+export const { addTask, removeTask, editTask } = taskSlice.actions;
+export default taskSlice.reducer;
