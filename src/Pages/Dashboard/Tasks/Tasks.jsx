@@ -102,7 +102,22 @@ export default function Tasks() {
                 className="customGreen p-1 border-0"
                 onClick={() => {
                   setTaskID(params.row.id);
-                  completeHandler(params);
+                  // completeHandler(params);
+                  setCompleteAt(
+                    `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
+                  );
+                  let updateTask = {
+                    id: params.row.id,
+                    title: params.row.title,
+                    createAt: params.row.createAt,
+                    completeAt: completeAt,
+                  };
+                  dispatch(
+                    editTask({
+                      data: updateTask,
+                      id: taskID,
+                    })
+                  );
                 }}
               >
                 <DoneIcon />
@@ -110,8 +125,13 @@ export default function Tasks() {
               <Button
                 className="customBlue p-1 border-0"
                 onClick={() => {
-                  editHandler(params);
+                  setTaskID(params.row.id);
+                  setTaskName(params.row.title);
+                  setCreateAt(params.row.createAt);
+                  setCompleteAt(params.row.completeAt);
+                  setOpeningModal(true);
                   setTypeOfModal("edit");
+                  console.log(openingModal);
                 }}
               >
                 <EditIcon />
@@ -152,10 +172,16 @@ export default function Tasks() {
       }
     }
     if (typeOfModal === "edit") {
+      let updateTask = {
+        id: taskID,
+        title: taskName,
+        createAt: createAt,
+        completeAt: completeAt,
+      };
       if (action) {
         dispatch(
           editTask({
-            data: newTask,
+            data: updateTask,
             id: taskID,
           })
         );
@@ -165,14 +191,6 @@ export default function Tasks() {
         setOpeningModal(false);
       }
     }
-  };
-
-  const editHandler = (data) => {
-    setTaskID(data.row.id);
-    setTaskName(data.row.title);
-    setCompleteAt(data.row.completeAt);
-    setCreateAt(data.row.createAt);
-    setOpeningModal(true);
   };
 
   const deleteHandler = (data) => {
@@ -196,6 +214,7 @@ export default function Tasks() {
       `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
     );
     let updateTask = {
+      id: data.row.id,
       title: data.row.title,
       createAt: data.row.createAt,
       completeAt: completeAt,

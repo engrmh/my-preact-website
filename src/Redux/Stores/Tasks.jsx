@@ -39,6 +39,9 @@ const taskSlice = createSlice({
         `https://apptest.bashiridev.ir/api/Task/PutTask/${action.payload.id}`,
         {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(action.payload.data),
         }
       )
