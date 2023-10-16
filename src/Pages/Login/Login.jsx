@@ -60,10 +60,13 @@ export default function Login() {
       body: JSON.stringify(userDataForLogin),
     })
       .then((res) => res.json())
-      .then(async (result) => {
-        await Swal.fire("Welcome", "", "success");
+      .then((result) => {
+        Swal.fire("Welcome", "", "success");
         authContext.login(result.token);
         authContext.getUserInfosFromServer(result.token);
+        localStorage.setItem("user", JSON.stringify(result.token));
+        authContext.setToken(result.token)
+        console.log(result.token)
         route("/dashboard");
       })
       .catch(async (err) => {

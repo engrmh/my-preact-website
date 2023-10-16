@@ -1,4 +1,4 @@
-import Router, { getCurrentUrl, useRouter, route } from "preact-router";
+import Router, { getCurrentUrl, route } from "preact-router";
 import "./app.css";
 import Home from "./Pages/Home/Home.jsx";
 import About from "./Pages/About/About.jsx";
@@ -26,17 +26,18 @@ import { useCallback } from "react";
 import Swal from "sweetalert2";
 
 export function App() {
-  const navigate = useRouter();
   const location = getCurrentUrl();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [userInfos, setUserInfos] = useState({});
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
   const [token, setToken] = useState("");
+
+
   const login = (tokenData) => {
     setToken(tokenData);
     setIsLogin(true);
-    localStorage.setItem("user", JSON.stringify({ token }));
+    // localStorage.setItem("user", JSON.stringify({ token }));
   };
 
   const logout = useCallback(() => {
@@ -46,19 +47,29 @@ export function App() {
     localStorage.removeItem("user");
   }, []);
 
-  const getUserInfosFromServer = (tokenData) => {
-    fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
-      headers: {
-        Authorization: `Bearer ${tokenData}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((userData) => {
-        setIsLogin(true);
-        setUserInfos(userData);
-        console.log(userData);
-      });
-  };
+  // const getUserInfosFromServer = (tokenData) => {
+  //   fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
+  //     headers: {
+  //       Authorization: `Bearer ${tokenData}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((userData) => {
+  //       setIsLogin(true);
+  //       setUserInfos(userData);
+  //       console.log(userData);
+  //     });
+  // };
+  
+  // const chechIsUserLogin = (tokenData) => {
+  //   fetch(`https://apptest.bashiridev.ir/api/Account/login`)
+  //     .then((res) => res.json())
+  //     .then((userData) => {
+  //       setIsLogin(true);
+  //       setUserInfos(userData);
+  //       console.log(userData);
+  //     });
+  // };
 
   useEffect(() => {
     const localStorageDate = JSON.parse(localStorage.getItem("user"));
@@ -70,8 +81,9 @@ export function App() {
       })
         .then((res) => res.json())
         .then((userData) => {
-          setIsLogin(true);
-          setUserInfos(userData);
+          console.log(userData);
+          // setIsLogin(true);
+          // setUserInfos(userData);
         });
     }
   }, [login, token]);
