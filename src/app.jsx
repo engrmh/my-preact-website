@@ -14,7 +14,6 @@ import Login from "./Pages/Login/Login.jsx";
 import { Col, Container, Row } from "react-bootstrap";
 import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
 import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
-import { toast } from "react-toastify";
 import SideBarOffCanvas from "./Components/PanelAdmin/SideBar/SideBarOffCanvas/SideBarOffCanvas.jsx";
 import Users from "./Pages/Dashboard/Users/Users.jsx";
 import Notifications from "./Pages/Dashboard/Notifications/Notifications.jsx";
@@ -23,18 +22,59 @@ import Tasks from "./Pages/Dashboard/Tasks/Tasks.jsx";
 import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask.jsx";
 import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts.jsx";
 import Profile from "./Pages/Dashboard/Profile/Profile.jsx";
+import { useCallback } from "react";
+import Swal from "sweetalert2";
 
 export function App() {
+  const navigate = useRouter();
   const location = getCurrentUrl();
   const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfos, setUserInfos] = useState({});
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
+  const [token, setToken] = useState("");
+  const login = (tokenData) => {
+    setToken(tokenData);
+    setIsLogin(true);
+    localStorage.setItem("user", JSON.stringify({ token }));
+  };
+
+  const logout = useCallback(() => {
+    setToken(null);
+    setUserInfos({});
+    setIsLogin(false);
+    localStorage.removeItem("user");
+  }, []);
+
+  const getUserInfosFromServer = (tokenData) => {
+    fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
+      headers: {
+        Authorization: `Bearer ${tokenData}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((userData) => {
+        setIsLogin(true);
+        setUserInfos(userData);
+        console.log(userData);
+      });
+  };
 
   useEffect(() => {
-    // console.log(projects);
-    // console.log(isShowSideBarMenu);
-  }, []);
+    const localStorageDate = JSON.parse(localStorage.getItem("user"));
+    if (localStorageDate) {
+      fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
+        headers: {
+          Authorization: `Bearer ${localStorageDate.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((userData) => {
+          setIsLogin(true);
+          setUserInfos(userData);
+        });
+    }
+  }, [login, token]);
 
   window.addEventListener("offline", () => {
     setConnectionStatus(false);
@@ -51,42 +91,54 @@ export function App() {
           value={{
             isLogin,
             setIsLogin,
-            userInfo,
-            setUserInfo,
+            userInfos,
+            setUserInfos,
             connectionStatus,
             setConnectionStatus,
             isShowSideBarMenu,
             setIsShowSideBarMenu,
+            getUserInfosFromServer,
           }}
         >
           <Container fluid className="">
-            <Row>
-              <Col lg={2}>
-                <div class="position-sticky top-0">
-                  <SideBar />
-                </div>
-                <SideBarOffCanvas />
-              </Col>
-              <Col xs={12} md={12} lg={10}>
-                <div class="position-sticky top-0" style={{ zIndex: "1000" }}>
-                  <TopBar />
-                </div>
-                <div class="pb-5">
-                  <Router>
-                    <Dashboard path="/dashboard" />
-                    <Projects path="/dashboard/projects" />
-                    <Users path="/dashboard/users" />
-                    <Notifications path="/dashboard/notifs" />
-                    <Analytics path="/dashboard/analytics" />
-                    <Tasks path="/dashboard/tasks" />
-                    <CurrentTask path="/dashboard/currentTask/:id" />
-                    <ShortCuts path="/dashboard/shortcuts" />
-                    <Profile path="/dashboard/profile" />
-                    {/*<Page404 path="/dashboard/*" default />*/}
-                  </Router>
-                </div>
-              </Col>
-            </Row>
+            {isLogin ? (
+              <Row>
+                <Col lg={2}>
+                  <div class="position-sticky top-0">
+                    <SideBar />
+                  </div>
+                  <SideBarOffCanvas />
+                </Col>
+                <Col xs={12} md={12} lg={10}>
+                  <div class="position-sticky top-0" style={{ zIndex: "1000" }}>
+                    <TopBar />
+                  </div>
+                  <div class="pb-5">
+                    <Router>
+                      <Dashboard path="/dashboard" />
+                      <Projects path="/dashboard/projects" />
+                      <Users path="/dashboard/users" />
+                      <Notifications path="/dashboard/notifs" />
+                      <Analytics path="/dashboard/analytics" />
+                      <Tasks path="/dashboard/tasks" />
+                      <CurrentTask path="/dashboard/currentTask/:id" />
+                      <ShortCuts path="/dashboard/shortcuts" />
+                      <Profile path="/dashboard/profile" />
+                      {/*<Page404 path="/dashboard/*" default />*/}
+                    </Router>
+                  </div>
+                </Col>
+              </Row>
+            ) : (
+              Swal.fire("Access Denied!!", "Please Login", "error").then(
+                (res) => {
+                  console.log(res);
+                  if (res.isConfirmed) {
+                    route("/login");
+                  }
+                }
+              )
+            )}
           </Container>
         </SkylaxContext.Provider>
       ) : (

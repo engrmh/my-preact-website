@@ -1,11 +1,16 @@
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "preact/hooks";
+import { useContext, useEffect, useState } from "preact/hooks";
 import { gsap } from "gsap";
 import { Button } from "react-bootstrap";
 import Turnstile from "react-turnstile";
+import SkylaxContext from "../../Context/Context.jsx";
+import Router, { route } from "preact-router";
+import Swal from "sweetalert2";
+import Dashboard from "../Dashboard/Dashboard.jsx";
 export default function Login() {
   const [isVerifyCaptcha, setIsVerifyCaptcha] = useState(false);
+  const authContext = useContext(SkylaxContext);
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -28,6 +33,7 @@ export default function Login() {
     });
     // return ctx.revert()
   }, []);
+
   const {
     register,
     handleSubmit,
@@ -35,13 +41,34 @@ export default function Login() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: "",
+      userName: "",
       password: "",
     },
   });
 
   const formSubmiting = (data) => {
-    // console.log(data);
+    const userDataForLogin = {
+      userName: data.userName,
+      password: data.password,
+      rememberMe: true,
+    };
+    fetch("https://apptest.bashiridev.ir/api/Account/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDataForLogin),
+    })
+      .then((res) => res.json())
+      .then(async (result) => {
+        await Swal.fire("Welcome", "", "success");
+        authContext.login(result.token);
+        authContext.getUserInfosFromServer(result.token);
+        route("/dashboard");
+      })
+      .catch(async (err) => {
+        await Swal.fire("User Not Found!!!", `${err}`, "error");
+      });
   };
 
   return (
@@ -54,28 +81,23 @@ export default function Login() {
             className="d-flex flex-column justify-content-center align-items-center mb-2"
           >
             <input
-              type="email"
-              inputMode="email"
+              type="text"
               className="loginInput border-0 rounded bg-white p-2 mb-2"
-              placeholder="Email"
-              {...register("email", {
-                required: "Email is required & should be have @ character",
+              placeholder="Username"
+              {...register("userName", {
+                required: "Username is required",
                 minLength: {
-                  value: 10,
-                  message: "Name should be have 10 characters and more",
+                  value: 5,
+                  message: "Name should be have 5 characters and more",
                 },
                 maxLength: {
-                  value: 40,
-                  message: "Maximum Characters is 40",
-                },
-                pattern: {
-                  value: /[^@\t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g,
-                  message: "Email not valid",
+                  value: 30,
+                  message: "Maximum Characters is 30",
                 },
               })}
             />
             <span className="text-white mb-2" style={{ fontSize: "0.8rem" }}>
-              {errors.email && errors.email.message}
+              {errors.userName && errors.userName.message}
             </span>
             <input
               type="password"
@@ -90,11 +112,6 @@ export default function Login() {
                 maxLength: {
                   value: 20,
                   message: "Maximum Characters is 20",
-                },
-                pattern: {
-                  value:
-                    /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])[A-Za-z0-9!@#$%^&*()_+]{8,20}/g,
-                  message: "Password Not Valid",
                 },
               })}
             />
