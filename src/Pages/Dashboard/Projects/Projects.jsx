@@ -38,17 +38,15 @@ export default function Projects() {
   const dispatch = useDispatch();
   const allProjectsFormServer = useSelector((state) => state.projects);
   const [allProjects, setAllProjects] = useState(allProjectsFormServer);
-
-  let newProject = {
-    name: projectName,
-    customer,
-    salary,
-    projectTechnologies,
-    creator,
-    image: projectPhoto,
-    description: projectDesc,
-  };
-
+  const newProject = new FormData();
+  newProject.append("image", projectPhoto);
+  newProject.append("name", projectName);
+  newProject.append("customer", customer);
+  newProject.append("salary", salary);
+  newProject.append("projectTechnologies", projectTechnologies);
+  newProject.append("creator", creator);
+  newProject.append("description", projectDesc);
+  
   useEffect(() => {
     dispatch(getAllProjectFromServer());
     setAllProjects(allProjectsFormServer);
@@ -158,6 +156,7 @@ export default function Projects() {
         setOpeningModal(false);
       }
     }
+    
     if (typeOfModal === "edit") {
       if (action) {
         dispatch(
@@ -347,7 +346,7 @@ export default function Projects() {
                   placeholder="Ppoject Photo"
                   accept="image/png, image/jpeg, image/jpg"
                   value={projectPhoto}
-                  onChange={(e) => setProjectPhoto(e.target.value)}
+                  onChange={(e) => setProjectPhoto(e.target.files[0])}
                 />
               </div>
               <div className="d-flex align-items-center bg-secondary bg-opacity-25 p-2 rounded">

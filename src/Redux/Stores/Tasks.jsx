@@ -26,7 +26,7 @@ const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       fetch(
-        `https://apptest.bashiridev.ir/api/Task/DeleteTask/${action.payload}`,
+        `https://apptest.dev.ir/api/Task/DeleteTask/${action.payload}`,
         {
           method: "DELETE",
         }
