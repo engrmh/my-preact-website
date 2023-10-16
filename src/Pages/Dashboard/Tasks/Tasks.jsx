@@ -131,7 +131,6 @@ export default function Tasks() {
                   setCompleteAt(params.row.completeAt);
                   setOpeningModal(true);
                   setTypeOfModal("edit");
-                  console.log(openingModal);
                 }}
               >
                 <EditIcon />
@@ -202,29 +201,12 @@ export default function Tasks() {
       if (result.isConfirmed) {
         dispatch(removeTask(data.row.id));
         Swal.fire("Removed Successfully", "", "success");
+        setShowAllData(false);
         dispatch(getAllTasksFromServer());
       } else if (result.isDenied) {
         Swal.fire("Canceled", "", "info");
       }
     });
-  };
-
-  const completeHandler = (data) => {
-    setCompleteAt(
-      `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
-    );
-    let updateTask = {
-      id: data.row.id,
-      title: data.row.title,
-      createAt: data.row.createAt,
-      completeAt: completeAt,
-    };
-    dispatch(
-      editTask({
-        data: updateTask,
-        id: taskID,
-      })
-    );
   };
 
   setTimeout(() => {

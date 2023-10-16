@@ -1,77 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import data from "../../data.jsx";
 
-export const getAllUserFromServer = createAsyncThunk(
-  "Users/getAllUsersFromServer",
-  async (url) => {
-    return fetch(url)
+export const getAllUsersFromServer = createAsyncThunk(
+  "User/getAllUsersFromServer",
+  async () => {
+    return fetch("https://apptest.bashiridev.ir/api/User")
       .then((res) => res.json())
       .then((data) => data);
   }
 );
 
-const usersSlice = createSlice({
-  name: "Users",
+const userSlice = createSlice({
+  name: "User",
   initialState: [],
   reducers: {
     addUser: (state, action) => {
-      // fetch();
+      return fetch("https://apptest.bashiridev.ir/api/User", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(action.payload),
+      })
+        .then((res) => res.json())
+        .then((data) => data);
     },
     removeUser: (state, action) => {
-      state.some((user) => {
-        if (user.id === action.payload.id) {
-          user = action.payload;
-        }
-      });
+      fetch(`https://apptest.bashiridev.ir/api/User/${action.payload}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => data);
     },
-    editUser: (state, action) => {},
-    showUserPassword: (state, action) => {},
-    resetUserPass: (state, action) => {},
+    editUser: (state, action) => {
+      fetch(`https://apptest.bashiridev.ir/api/User/${action.payload.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(action.payload.data),
+      })
+        .then((res) => res.json())
+        .then((data) => data);
+    },
   },
   extraReducers: {
-    [getAllUserFromServer.fulfilled]: (state, action) => {
-      state.push(...action.payload);
-    },
+    [getAllUsersFromServer.fulfilled]: (state, action) => action.payload,
   },
 });
 
-export const {
-  addUser,
-  removeUser,
-  editUser,
-  showUserPassword,
-  resetUserPass,
-} = usersSlice.actions;
-export default usersSlice.reducer;
-
-// const userReducer = (state = [], action) => {
-//   switch (action.type) {
-//     case addUser:
-//       return [...state, action.payload];
-//     case removeUser:
-//       return [...state].filter((user) => user.id !== action.id);
-//     case editUser: {
-//       let currentState = [...state];
-//       let newState = currentState;
-//       return newState;
-//     }
-//     case showUserPassword: {
-//       let userPassword;
-//       [...state].some((user) => {
-//         if (user.id === action.id) {
-//           userPassword = user.password;
-//         }
-//       });
-//       return userPassword;
-//     }
-//     case resetUserPass: {
-//       [...state].some((user) => {
-//         if (user.id === action.id) {
-//           user.password = "12345678";
-//         }
-//       });
-//     }
-//     default:
-//       return state;
-//   }
-// };
+export const { addUser, removeUser, editUser } = userSlice.actions;
+export default userSlice.reducer;
