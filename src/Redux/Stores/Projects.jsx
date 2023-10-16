@@ -16,10 +16,11 @@ const projectSlice = createSlice({
     addProject: (state, action) => {
       fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(action.payload),
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        // body: JSON.stringify(action.payload),
+        body: action.payload,
       })
         .then((res) => res.json())
         .then((data) => data);
