@@ -14,7 +14,8 @@ const userSlice = createSlice({
   initialState: [],
   reducers: {
     addUser: (state, action) => {
-      return fetch("https://apptest.bashiridev.ir/api/User", {
+      console.log(action.payload);
+      fetch("https://apptest.bashiridev.ir/api/User", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,10 +35,7 @@ const userSlice = createSlice({
     editUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload.id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(action.payload.data),
+        body: action.payload.data,
       })
         .then((res) => res.json())
         .then((data) => data);

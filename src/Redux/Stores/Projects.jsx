@@ -27,10 +27,9 @@ const projectSlice = createSlice({
     },
     removeProject: (state, action) => {
       fetch(
-        `https://apptest.bashiridev.ir/api/Projects/DeleteProject?id=${action.payload.id}`,
+        `https://apptest.bashiridev.ir/api/Projects/DeleteProject?id=${action.payload}`,
         {
           method: "DELETE",
-          body: JSON.stringify(action.payload),
         }
       )
         .then((res) => res.json())
