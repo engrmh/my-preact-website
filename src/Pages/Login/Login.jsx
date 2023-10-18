@@ -4,13 +4,10 @@ import { useContext, useEffect, useState } from "preact/hooks";
 import { gsap } from "gsap";
 import { Button } from "react-bootstrap";
 import Turnstile from "react-turnstile";
-import SkylaxContext from "../../Context/Context.jsx";
-import Router, { route } from "preact-router";
-import Swal from "sweetalert2";
-import Dashboard from "../Dashboard/Dashboard.jsx";
-export default function Login() {
+
+
+export default function Login({loginDataTransfer}) {
   const [isVerifyCaptcha, setIsVerifyCaptcha] = useState(false);
-  const authContext = useContext(SkylaxContext);
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -52,26 +49,7 @@ export default function Login() {
       password: data.password,
       rememberMe: true,
     };
-    fetch("https://apptest.bashiridev.ir/api/Account/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userDataForLogin),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        Swal.fire("Welcome", "", "success");
-        authContext.login(result.token);
-        authContext.getUserInfosFromServer(result.token);
-        localStorage.setItem("user", JSON.stringify(result.token));
-        authContext.setToken(result.token)
-        console.log(result.token)
-        route("/dashboard");
-      })
-      .catch(async (err) => {
-        await Swal.fire("User Not Found!!!", `${err}`, "error");
-      });
+    loginDataTransfer(userDataForLogin)
   };
 
   return (

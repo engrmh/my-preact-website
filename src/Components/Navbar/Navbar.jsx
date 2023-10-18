@@ -26,7 +26,7 @@ function NavBar({active}) {
             <Nav.Link href='/' className={active === 'home'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Home</Nav.Link>
             <Nav.Link href='/about' className={active === 'about'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>About</Nav.Link>
             <Nav.Link href='/resume' className={active === 'resume'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Resume</Nav.Link>
-            <Nav.Link href='/portfolio' className={active === 'portfolio'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Portfolio</Nav.Link>
+            <Nav.Link disabled href='/portfolio' className={active === 'portfolio'? 'text-white border-bottom border-2' : 'text-white'} style={{width: "fit-content"}}>Portfolio</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

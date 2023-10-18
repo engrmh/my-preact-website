@@ -12,40 +12,89 @@ import { useEffect, useState } from "preact/hooks";
 import SkylaxContext from "./Context/Context.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import { Col, Container, Row } from "react-bootstrap";
-import TopBar from "./Components/PanelAdmin/TopBar/TopBar.jsx";
-import SideBar from "./Components/PanelAdmin/SideBar/SideBar.jsx";
-import SideBarOffCanvas from "./Components/PanelAdmin/SideBar/SideBarOffCanvas/SideBarOffCanvas.jsx";
-import Users from "./Pages/Dashboard/Users/Users.jsx";
-import Notifications from "./Pages/Dashboard/Notifications/Notifications.jsx";
-import Analytics from "./Pages/Dashboard/Analytics/Analytics.jsx";
-import Tasks from "./Pages/Dashboard/Tasks/Tasks.jsx";
-import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask.jsx";
-import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts.jsx";
-import Profile from "./Pages/Dashboard/Profile/Profile.jsx";
+import TopBar from "./Components/PanelAdmin/TopBar/TopBar";
+import SideBar from "./Components/PanelAdmin/SideBar/SideBar";
+import SideBarOffCanvas from "./Components/PanelAdmin/SideBar/SideBarOffCanvas/SideBarOffCanvas";
+import Users from "./Pages/Dashboard/Users/Users";
+import Notifications from "./Pages/Dashboard/Notifications/Notifications";
+import Analytics from "./Pages/Dashboard/Analytics/Analytics";
+import Tasks from "./Pages/Dashboard/Tasks/Tasks";
+import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask";
+import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts";
+import Profile from "./Pages/Dashboard/Profile/Profile";
 import { useCallback } from "react";
 import Swal from "sweetalert2";
 
 export function App() {
-  const location = getCurrentUrl();
-  const [isLogin, setIsLogin] = useState(true);
+  const [siteLocation, setSiteLocation] = useState(getCurrentUrl());
+  const [login, setLogin] = useState(true);
   const [userInfos, setUserInfos] = useState({});
   const [connectionStatus, setConnectionStatus] = useState(true);
   const [isShowSideBarMenu, setIsShowSideBarMenu] = useState(false);
   const [token, setToken] = useState("");
 
+  const toastAlert = Swal.mixin({
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: "#454545",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
-  const login = (tokenData) => {
-    setToken(tokenData);
-    setIsLogin(true);
+  const loginAction = (userDataForLogin) => {
     // localStorage.setItem("user", JSON.stringify({ token }));
+    fetch("https://apptest.bashiridev.ir/api/Account/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDataForLogin),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((result) => {
+        localStorage.setItem("user", result.token);
+        setToken(result.token);
+        setSiteLocation(getCurrentUrl());
+      })
+      .then((e) => {
+        setLogin(true);
+        route("/dashboard");
+        toastAlert.fire({
+          icon: "success",
+          title: "Signed in successfully, Welcome",
+        });
+        setTimeout(() => {
+          reloadSite();
+        }, 2000);
+      })
+      .catch((err) => {
+        Swal.fire(
+          "User Not Found!!",
+          "Try Again ,  If You Sure Call To Site Admin",
+          "error"
+        );
+      });
   };
 
-  const logout = useCallback(() => {
-    setToken(null);
-    setUserInfos({});
-    setIsLogin(false);
-    localStorage.removeItem("user");
-  }, []);
+  const reloadSite = () => {
+    location.reload();
+  };
+
+  // const logout = useCallback(() => {
+  //   setToken(null);
+  //   setUserInfos({});
+  //   setIsLogin(false);
+  //   localStorage.removeItem("user");
+  // }, []);
 
   // const getUserInfosFromServer = (tokenData) => {
   //   fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
@@ -60,7 +109,7 @@ export function App() {
   //       console.log(userData);
   //     });
   // };
-  
+
   // const chechIsUserLogin = (tokenData) => {
   //   fetch(`https://apptest.bashiridev.ir/api/Account/login`)
   //     .then((res) => res.json())
@@ -81,12 +130,13 @@ export function App() {
       })
         .then((res) => res.json())
         .then((userData) => {
-          console.log(userData);
           // setIsLogin(true);
-          // setUserInfos(userData);
+          setUserInfos(userData);
         });
+    } else {
+      setLogin(false);
     }
-  }, [login, token]);
+  }, [loginAction, token]);
 
   window.addEventListener("offline", () => {
     setConnectionStatus(false);
@@ -98,22 +148,23 @@ export function App() {
 
   return (
     <>
-      {location.includes("dashboard") ? (
+      {siteLocation.includes("dashboard") ? (
         <SkylaxContext.Provider
           value={{
-            isLogin,
-            setIsLogin,
+            login,
+            setLogin,
             userInfos,
             setUserInfos,
             connectionStatus,
             setConnectionStatus,
             isShowSideBarMenu,
             setIsShowSideBarMenu,
-            getUserInfosFromServer,
+            loginAction,
+            reloadSite,
           }}
         >
           <Container fluid className="">
-            {isLogin ? (
+            {login ? (
               <Row>
                 <Col lg={2}>
                   <div class="position-sticky top-0">
@@ -144,7 +195,6 @@ export function App() {
             ) : (
               Swal.fire("Access Denied!!", "Please Login", "error").then(
                 (res) => {
-                  console.log(res);
                   if (res.isConfirmed) {
                     route("/login");
                   }
@@ -161,7 +211,14 @@ export function App() {
             <Resume path="/resume" />
             <Portfolio path="/portfolio" />
             <CurrentProject path="/portfolio/:current" />
-            <Login path="/login" />
+            {login ? (
+              route("/dashboard")
+            ) : (
+              <Login
+                path="/login"
+                loginDataTransfer={(data) => loginAction(data)}
+              />
+            )}
             <Page404 path="/*" default />
           </Router>
         </>

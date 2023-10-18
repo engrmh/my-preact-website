@@ -42,7 +42,7 @@ export default function Users() {
   let newUser = {
     email,
     userName,
-    rolTitle: userRol,
+    roleTitle: userRol,
     password: userPassword,
   };
 

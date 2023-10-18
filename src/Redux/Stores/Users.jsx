@@ -14,7 +14,6 @@ const userSlice = createSlice({
   initialState: [],
   reducers: {
     addUser: (state, action) => {
-      console.log(action.payload);
       fetch("https://apptest.bashiridev.ir/api/User", {
         method: "POST",
         headers: {
