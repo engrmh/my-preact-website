@@ -74,18 +74,6 @@ export default function SideBar() {
               <span className="text-white">Notifications</span>
             </a>
             <a
-              href="/dashboard/analytics"
-              onClick={() => setActiveMenu("analytics")}
-              className={
-                activeMenu === "analytics"
-                  ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
-                  : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
-              }
-            >
-              <AnalyticsIcon />
-              <span className="text-white">Analytics</span>
-            </a>
-            <a
               href="/dashboard/tasks"
               onClick={() => setActiveMenu("tasks")}
               className={
@@ -108,6 +96,18 @@ export default function SideBar() {
             >
               <ShortcutIcon />
               <span className="text-white">Shortcuts</span>
+            </a>
+            <a
+              href="/dashboard/analytics"
+              onClick={() => setActiveMenu("analytics")}
+              className={
+                activeMenu === "analytics"
+                  ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                  : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+              }
+            >
+              <AnalyticsIcon />
+              <span className="text-white">Analytics</span>
             </a>
             <a
               // href="/dashboard"

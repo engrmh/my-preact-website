@@ -23,18 +23,17 @@ export default function TopBar() {
 
   navigator.getBattery().then((battery) => {
     setChargingStatus(battery.charging);
-    setBattryLevel(battery.level * 100);
+    setBattryLevel((battery.level * 100).toFixed());
 
     battery.addEventListener("chargingchange", () => {
       setChargingStatus(battery.charging);
       setBattryLevel(battery.level * 100);
       navigator.vibrate(100)
-
     });
   });
 
   useEffect(() => {
-    console.log(siteContext.isShowSideBarMenu);
+    // console.log(siteContext.isShowSideBarMenu);
   }, [siteContext.isShowSideBarMenu]);
 
   return (

@@ -47,7 +47,6 @@ export function App() {
   });
 
   const loginAction = (userDataForLogin) => {
-    // localStorage.setItem("user", JSON.stringify({ token }));
     fetch("https://apptest.bashiridev.ir/api/Account/login", {
       method: "POST",
       headers: {
@@ -61,6 +60,7 @@ export function App() {
         }
       })
       .then((result) => {
+        setLogin(true);
         localStorage.setItem("user", result.token);
         setToken(result.token);
         setSiteLocation(getCurrentUrl());
@@ -68,13 +68,7 @@ export function App() {
       .then((e) => {
         setLogin(true);
         route("/dashboard");
-        toastAlert.fire({
-          icon: "success",
-          title: "Signed in successfully, Welcome",
-        });
-        setTimeout(() => {
-          reloadSite();
-        }, 2000);
+        reloadSite();
       })
       .catch((err) => {
         Swal.fire(
@@ -82,11 +76,27 @@ export function App() {
           "Try Again ,  If You Sure Call To Site Admin",
           "error"
         );
+      })
+      .finally(() => {
+        if (login) {
+          toastAlert.fire({
+            icon: "success",
+            title: "Signed in successfully, Welcome",
+          });
+        }
       });
   };
 
   const reloadSite = () => {
     location.reload();
+  };
+
+  const handleRedirect = (route) => {
+    if (route === "login") {
+      location.replace("/login");
+    } else if (route === "dashboard") {
+      location.replace("/dashboard");
+    }
   };
 
   // const logout = useCallback(() => {
@@ -130,7 +140,7 @@ export function App() {
       })
         .then((res) => res.json())
         .then((userData) => {
-          // setIsLogin(true);
+          setIsLogin(true);
           setUserInfos(userData);
         });
     } else {
@@ -196,7 +206,7 @@ export function App() {
               Swal.fire("Access Denied!!", "Please Login", "error").then(
                 (res) => {
                   if (res.isConfirmed) {
-                    route("/login");
+                    handleRedirect("login");
                   }
                 }
               )
@@ -211,9 +221,7 @@ export function App() {
             <Resume path="/resume" />
             <Portfolio path="/portfolio" />
             <CurrentProject path="/portfolio/:current" />
-            {login ? (
-              route("/dashboard")
-            ) : (
+            {!login && (
               <Login
                 path="/login"
                 loginDataTransfer={(data) => loginAction(data)}
