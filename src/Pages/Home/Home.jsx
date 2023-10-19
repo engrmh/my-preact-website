@@ -11,9 +11,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import FullScreen from "../../Components/Footer/FullScreen.jsx";
-import { useEffect , useState} from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { gsap } from "gsap";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function Home() {
   const [localStorageData, setLocalStorageData] = useState(false);
@@ -49,6 +49,15 @@ export default function Home() {
 
   return (
     <div className="homeContainer vh-100">
+      <video
+        autoplay="true"
+        loop
+        muted="true"
+        preload="auto"
+        className="homeVideoBack"
+      >
+        <source src="./../../../public/videos/homepage.mp4" type="video/mp4" />
+      </video>
       <div class="">
         <NavBar active="home" />
       </div>
@@ -96,7 +105,7 @@ export default function Home() {
       <Container className="position-fixed bottom-0 start-0 end-0 py-3">
         <div className="d-flex">
           <div className="d-flex gap-3">
-          {localStorageData ? (
+            {localStorageData ? (
               <SocialApp link="/dashboard" classInfo="">
                 <DashboardIcon className="text-white fs-3 social" />
               </SocialApp>

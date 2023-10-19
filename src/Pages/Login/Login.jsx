@@ -5,8 +5,7 @@ import { gsap } from "gsap";
 import { Button } from "react-bootstrap";
 import Turnstile from "react-turnstile";
 
-
-export default function Login({loginDataTransfer}) {
+export default function Login({ loginDataTransfer }) {
   const [isVerifyCaptcha, setIsVerifyCaptcha] = useState(false);
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -49,7 +48,7 @@ export default function Login({loginDataTransfer}) {
       password: data.password,
       rememberMe: true,
     };
-    loginDataTransfer(userDataForLogin)
+    loginDataTransfer(userDataForLogin);
   };
 
   return (
@@ -99,6 +98,7 @@ export default function Login({loginDataTransfer}) {
             <span className="text-white mb-2" style={{ fontSize: "0.8rem" }}>
               {errors.password && errors.password.message}
             </span>
+            {/* For Test Captcha & develop position */}
             {/* <Turnstile
               className="w-100 rounded"
               sitekey="1x00000000000000000000AA"
@@ -106,6 +106,7 @@ export default function Login({loginDataTransfer}) {
                 setIsVerifyCaptcha(true);
               }}
             /> */}
+            {/* Official For Site skylax.ir */}
             <Turnstile
               className="w-100 rounded"
               sitekey="0x4AAAAAAAL4YwwJ0rf7NETq"
