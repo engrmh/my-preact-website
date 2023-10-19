@@ -20,6 +20,7 @@ export default function SideBarOffCanvas() {
   }, []);
   const handleClose = () => {
     siteContext.setIsShowSideBarMenu(false);
+    setShowMenu(false)
   };
   useEffect(() => {
     setShowMenu(siteContext.isShowSideBarMenu);
@@ -27,7 +28,7 @@ export default function SideBarOffCanvas() {
   return (
     <>
       <Offcanvas
-        show={showMenu}
+        show={siteContext.isShowSideBarMenu}
         onHide={handleClose}
         className="bg-dark rounded p-2 sideBarContainer"
       >

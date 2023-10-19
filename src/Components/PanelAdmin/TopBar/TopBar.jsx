@@ -16,6 +16,7 @@ export default function TopBar() {
   const siteContext = useContext(SkylaxContext);
   const [chargingStatus, setChargingStatus] = useState(false);
   const [battryLevel, setBattryLevel] = useState(null);
+
   const showMenuHandler = () => {
     siteContext.setIsShowSideBarMenu(true);
   };
@@ -23,18 +24,17 @@ export default function TopBar() {
   navigator.getBattery().then((battery) => {
     setChargingStatus(battery.charging);
     setBattryLevel(battery.level * 100);
-    navigator.vibrate(200);
 
     battery.addEventListener("chargingchange", () => {
       setChargingStatus(battery.charging);
       setBattryLevel(battery.level * 100);
-      navigator.vibrate(200);
+
     });
   });
 
   // useEffect(() => {
-  //   console.log(chargingStatus);
-  // }, [chargingStatus]);
+    
+  // }, [siteContext.isShowSideBarMenu]);
 
   return (
     <div className="pt-3">

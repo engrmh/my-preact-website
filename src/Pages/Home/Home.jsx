@@ -11,10 +11,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import NavBar from "../../Components/Navbar/Navbar.jsx";
 import FullScreen from "../../Components/Footer/FullScreen.jsx";
-import { useEffect } from "preact/hooks";
+import { useEffect , useState} from "preact/hooks";
 import { gsap } from "gsap";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export default function Home() {
+  const [localStorageData, setLocalStorageData] = useState(false);
+
   useEffect(() => {
     gsap.context(() => {
       const tl = gsap.timeline({
@@ -36,6 +39,14 @@ export default function Home() {
         );
     });
   }, []);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("user");
+    if (localData) {
+      setLocalStorageData(true);
+    }
+  }, []);
+
   return (
     <div className="homeContainer vh-100">
       <div class="">
@@ -85,6 +96,15 @@ export default function Home() {
       <Container className="position-fixed bottom-0 start-0 end-0 py-3">
         <div className="d-flex">
           <div className="d-flex gap-3">
+          {localStorageData ? (
+              <SocialApp link="/dashboard" classInfo="">
+                <DashboardIcon className="text-white fs-3 social" />
+              </SocialApp>
+            ) : (
+              <SocialApp link="/login" classInfo="">
+                <AccountCircleIcon className="text-white fs-3 social" />
+              </SocialApp>
+            )}
             <SocialApp link="https://www.linkedin.com/mohammad-hosein-salimbahrami">
               <LinkedInIcon className="text-white fs-3 social" />
             </SocialApp>
@@ -99,9 +119,6 @@ export default function Home() {
             </SocialApp>
             <SocialApp link="https://github.com/engrmh">
               <GitHubIcon className="text-white fs-3 social" />
-            </SocialApp>
-            <SocialApp link="/login" classInfo="">
-              <AccountCircleIcon className="text-white fs-3 social" />
             </SocialApp>
           </div>
           <FullScreen />
