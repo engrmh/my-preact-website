@@ -28,13 +28,14 @@ export default function TopBar() {
     battery.addEventListener("chargingchange", () => {
       setChargingStatus(battery.charging);
       setBattryLevel(battery.level * 100);
+      navigator.vibrate(100)
 
     });
   });
 
-  // useEffect(() => {
-    
-  // }, [siteContext.isShowSideBarMenu]);
+  useEffect(() => {
+    console.log(siteContext.isShowSideBarMenu);
+  }, [siteContext.isShowSideBarMenu]);
 
   return (
     <div className="pt-3">

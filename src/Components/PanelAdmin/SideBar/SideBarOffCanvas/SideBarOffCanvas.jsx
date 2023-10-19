@@ -20,7 +20,7 @@ export default function SideBarOffCanvas() {
   }, []);
   const handleClose = () => {
     siteContext.setIsShowSideBarMenu(false);
-    setShowMenu(false)
+    setShowMenu(false);
   };
   useEffect(() => {
     setShowMenu(siteContext.isShowSideBarMenu);
@@ -106,21 +106,6 @@ export default function SideBarOffCanvas() {
                 <span className="text-white">Notifications</span>
               </a>
               <a
-                href="/dashboard/analytics"
-                onClick={() => {
-                  handleClose();
-                  setActiveMenu("analytics");
-                }}
-                className={
-                  activeMenu === "analytics"
-                    ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
-                    : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
-                }
-              >
-                <AnalyticsIcon />
-                <span className="text-white">Analytics</span>
-              </a>
-              <a
                 href="/dashboard/tasks"
                 onClick={() => {
                   handleClose();
@@ -137,7 +122,10 @@ export default function SideBarOffCanvas() {
               </a>
               <a
                 href="/dashboard/shortcuts"
-                onClick={() => setActiveMenu("shortcuts")}
+                onClick={() => {
+                  handleClose();
+                  setActiveMenu("shortcuts");
+                }}
                 className={
                   activeMenu === "shortcuts"
                     ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
@@ -146,6 +134,21 @@ export default function SideBarOffCanvas() {
               >
                 <ShortcutIcon />
                 <span className="text-white">Shortcuts</span>
+              </a>
+              <a
+                href="/dashboard/analytics"
+                onClick={() => {
+                  handleClose();
+                  setActiveMenu("analytics");
+                }}
+                className={
+                  activeMenu === "analytics"
+                    ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                    : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+                }
+              >
+                <AnalyticsIcon />
+                <span className="text-white">Analytics</span>
               </a>
               <a
                 // href="/dashboard"

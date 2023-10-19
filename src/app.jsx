@@ -121,11 +121,11 @@ export function App() {
   // };
 
   useEffect(() => {
-    const localStorageDate = JSON.parse(localStorage.getItem("user"));
-    if (localStorageDate) {
+    const localStorageData = localStorage.getItem("user");
+    if (localStorageData) {
       fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
         headers: {
-          Authorization: `Bearer ${localStorageDate.token}`,
+          Authorization: `Bearer ${localStorageData}`,
         },
       })
         .then((res) => res.json())
