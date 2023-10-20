@@ -5,7 +5,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import CloudOffIcon from "@mui/icons-material/CloudOff";
 import CloudIcon from "@mui/icons-material/Cloud";
 import MenuIcon from "@mui/icons-material/Menu";
-import PowerIcon from "@mui/icons-material/Power";
+import BoltIcon from '@mui/icons-material/Bolt';
 import PowerOffIcon from "@mui/icons-material/PowerOff";
 import SkylaxContext from "../../../Context/Context";
 import { useContext, useEffect, useState } from "preact/hooks";
@@ -82,7 +82,7 @@ export default function TopBar() {
                 className="text-decoration-none text-white d-flex"
               >
                 {chargingStatus ? (
-                  <PowerIcon className="text-warning" />
+                  <BoltIcon className="text-warning flasher" />
                 ) : (
                   <PowerOffIcon className="text-danger" />
                 )}

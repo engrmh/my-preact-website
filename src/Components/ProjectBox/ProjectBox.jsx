@@ -1,32 +1,64 @@
 import { Button, Card, Col } from "react-bootstrap";
 import "./ProjectBox.css";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 export default function ProjectBox({
-  title = "title",
+  name,
   getClass,
   link = "/portfolio",
-  image = "https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80",
+  image = "./img/projectSamplePic.jpg",
+  customer,
+  description,
+  creator,
+  imageName,
+  projectTechnologies
 }) {
   return (
-    <Col xs={12} md={4} lg={4} className={getClass}>
+    <Col xs={12} md={6} lg={6} className={getClass}>
       <div class="p-4 d-flex justify-content-center align-items-center projectBox">
-        <Card style={{ width: "18rem" }} className="px-1">
-          <div class="projectBoxImgBox rounded">
-            <Card.Img
-              variant="top"
-              className="rounded projectBoxImg"
-              src={image}
-            />
+        <Card style={{ width: "100%" }} className="px-1">
+          <div className="d-flex justify-content-between align-items-center">
+            <Card.Title className="mb-4 ps-2 d-flex align-items-center">
+              <span className="me-1">
+                <VerifiedIcon className="customBlueFont flasher" />
+              </span>
+              <span className="fs-4 fw-bold text-center">{name}</span>
+            </Card.Title>
+            <div class="projectBoxImgBox rounded w-25">
+              <Card.Img
+                variant="top"
+                className="rounded projectBoxImg"
+                src={image}
+              />
+            </div>
           </div>
           <Card.Body>
-            <Card.Title className="text-center">{title}</Card.Title>
-            <a
+            <h5 className="text-center border-bottom border-2 border-dark pb-2 mb-4">
+              More Info
+            </h5>
+            <h5 className="mb-4">
+              <span className="fw-bold customRedFont">Creator: </span>
+              <span className="">{creator}</span>
+            </h5>
+            <h5 className="mb-4">
+              <span className="fw-bold customRedFont">Customer: </span>
+              <span className="">{customer}</span>
+            </h5>
+            <h5 className="mb-4 d-flex align-items-start">
+              <span className="fw-bold customRedFont me-2">Technologies Used: </span>
+              <span className="">{projectTechnologies}</span>
+            </h5>
+            <h5 className="mb-4 d-flex align-items-start">
+              <span className="fw-bold customRedFont me-2">Description: </span>
+              <span className="">{description}</span>
+            </h5>
+            {/* <a
               href={link}
-              className="text-decoration-none btn btn-dark d-flex justify-content-center align-items-center"
+              className="text-decoration-none btn btn-dark d-flex justify-content-center align-items-center mb-2"
               style={{ marginTop: "1rem" }}
             >
               Show More
-            </a>
+            </a> */}
           </Card.Body>
         </Card>
       </div>

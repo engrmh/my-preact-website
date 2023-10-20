@@ -4,10 +4,31 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import GroupIcon from "@mui/icons-material/Group";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import TaskIcon from "@mui/icons-material/Task";
-import { useEffect } from "preact/hooks";
 import { gsap } from "gsap";
+import { useEffect, useState } from "preact/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProjectFromServer } from "../../../Redux/Stores/Projects.jsx";
+import { getAllUsersFromServer } from "../../../Redux/Stores/Users.jsx";
+import { getAllTasksFromServer } from "../../../Redux/Stores/Tasks.jsx";
 
 export default function LiveBoxes() {
+  const dispatch = useDispatch();
+  const [allProject, setAllProject] = useState([]);
+  const [allUser, setAllUser] = useState([]);
+  const [allTask, setAllTask] = useState([]);
+  const allProjectFromServer = useSelector((state) => state.projects);
+  const allUserFromServer = useSelector((state) => state.users);
+  const allTasksFromServer = useSelector((state) => state.tasks);
+  // const allNotifsFromServer = useSelector((state) => state.notifs);
+
+  useEffect(() => {
+    dispatch(getAllProjectFromServer());
+    dispatch(getAllUsersFromServer());
+    dispatch(getAllTasksFromServer());
+    setAllProject(allProjectFromServer);
+    setAllUser(allUserFromServer);
+    setAllProject(allTasksFromServer);
+  }, []);
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -30,7 +51,7 @@ export default function LiveBoxes() {
         <LiveBox
           link="/dashboard/projects"
           title="Projects"
-          count="1"
+          count={allProject}
           containerClass="liveBoxGsap"
           classData="customBlack"
         >
@@ -39,7 +60,7 @@ export default function LiveBoxes() {
         <LiveBox
           link="/dashboard/users"
           title="Users"
-          count="1"
+          count={allUser}
           containerClass="liveBoxGsap"
           classData="customRed"
         >
@@ -48,7 +69,7 @@ export default function LiveBoxes() {
         <LiveBox
           link="/dashboard/tasks"
           title="Tasks"
-          count="1"
+          count={allTask}
           containerClass="liveBoxGsap"
           classData="customGreen"
         >
@@ -57,7 +78,7 @@ export default function LiveBoxes() {
         <LiveBox
           link="/dashboard/notifs"
           title="Notifications"
-          count="1"
+          count="0"
           containerClass="liveBoxGsap"
           classData="customBlue"
         >

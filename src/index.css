@@ -89,3 +89,31 @@ body{
   background-color: #e12c6c99;
   cursor: pointer;
 }
+
+.customBlackFont{
+  color: #333239 !important;
+}
+.customRedFont{
+  color: #e12c6c !important;
+}
+.customGreenFont{
+  color: #5eb860 !important;
+}
+.customBlueFont{
+  color: #1f7cf2 !important;
+}
+.flasher{
+  animation: flasherAnimate 1.5s linear infinite;
+}
+
+@keyframes flasherAnimate {
+  0% {
+      opacity: 0;
+  }
+  50%{
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+  }
+}

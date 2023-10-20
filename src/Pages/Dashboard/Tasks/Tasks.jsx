@@ -225,6 +225,9 @@ export default function Tasks() {
                 onClick={() => {
                   setOpeningModal(true);
                   setTypeOfModal("add");
+                  setCreateAt(
+                    `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
+                  );
                 }}
               >
                 Add New Task

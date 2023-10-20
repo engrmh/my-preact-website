@@ -1,11 +1,22 @@
 import { Button, Col, Table } from "react-bootstrap";
+import { useEffect, useState } from "preact/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProjectFromServer } from "../../../Redux/Stores/Projects";
 
 export default function ProjectSection() {
+  const [allProject, setAllProject] = useState([]);
+  const allProjectFromServer = useSelector((state) => state.projects);
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    await dispatch(getAllProjectFromServer());
+    await setAllProject(allProjectFromServer);
+  }, []);
   return (
     <Col xs={12} md={8} lg={8} className="mt-4 mb-4 mb-lg-0">
       <div className={`setShadow bg-white p-3 rounded`}>
         <div className="mb-3 d-flex justify-content-between align-items-center">
-          <span className="">Active Users</span>
+          <span className="">Active Projects</span>
           {/*<Button className="p-0 customBlue">*/}
           {/*    <AddIcon />*/}
           {/*</Button>*/}
@@ -24,25 +35,15 @@ export default function ProjectSection() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Test 1</td>
-                  <td>John Doe</td>
-                  <td>1.5 T</td>
-                  <td>Mohammad</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Test 2</td>
-                  <td>Lorem Ipsum</td>
-                  <td>2 T</td>
-                  <td>Ahmad</td>
-                </tr>
-                {/*<tr>*/}
-                {/*  <td>3</td>*/}
-                {/*  <td colSpan={2}>Larry the Bird</td>*/}
-                {/*  <td>@twitter</td>*/}
-                {/*</tr>*/}
+                {allProject.slice(0, 6).map((project, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td>{project.name}</td>
+                    <td>{project.customer}</td>
+                    <td>{project.salary}</td>
+                    <td>{project.creator}</td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
