@@ -6,28 +6,26 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import TaskIcon from "@mui/icons-material/Task";
 import { gsap } from "gsap";
 import { useEffect, useState } from "preact/hooks";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProjectFromServer } from "../../../Redux/Stores/Projects.jsx";
-import { getAllUsersFromServer } from "../../../Redux/Stores/Users.jsx";
-import { getAllTasksFromServer } from "../../../Redux/Stores/Tasks.jsx";
 
 export default function LiveBoxes() {
-  const dispatch = useDispatch();
-  const [allProject, setAllProject] = useState([]);
-  const [allUser, setAllUser] = useState([]);
-  const [allTask, setAllTask] = useState([]);
-  const allProjectFromServer = useSelector((state) => state.projects);
-  const allUserFromServer = useSelector((state) => state.users);
-  const allTasksFromServer = useSelector((state) => state.tasks);
-  // const allNotifsFromServer = useSelector((state) => state.notifs);
+  const [allProject, setAllProject] = useState(0);
+  const [allUser, setAllUser] = useState(0);
+  const [allTask, setAllTask] = useState(0);
+  const [allNotifs, setAllNotifs] = useState(0);
 
   useEffect(() => {
-    dispatch(getAllProjectFromServer());
-    dispatch(getAllUsersFromServer());
-    dispatch(getAllTasksFromServer());
-    setAllProject(allProjectFromServer);
-    setAllUser(allUserFromServer);
-    setAllProject(allTasksFromServer);
+    fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+      .then((res) => res.json())
+      .then((data) => setAllProject(data.length));
+    fetch("https://apptest.bashiridev.ir/api/User")
+      .then((res) => res.json())
+      .then((data) => setAllUser(data.length));
+    fetch("https://apptest.bashiridev.ir/api/Task/GetTasks")
+      .then((res) => res.json())
+      .then((data) => setAllTask(data.length));
+    fetch("https://apptest.bashiridev.ir/api/Notifications/GetNotifications")
+      .then((res) => res.json())
+      .then((data) => setAllTask(data.length));
   }, []);
   useEffect(() => {
     let ctx = gsap.context(() => {

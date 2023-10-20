@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import Turnstile from "react-turnstile";
 
 export default function Login({ loginDataTransfer }) {
-  const [isVerifyCaptcha, setIsVerifyCaptcha] = useState(true);
+  const [isVerifyCaptcha, setIsVerifyCaptcha] = useState(false);
   useEffect(() => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({

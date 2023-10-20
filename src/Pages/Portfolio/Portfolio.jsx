@@ -4,18 +4,14 @@ import { MrMiyagi } from "@uiball/loaders";
 import { Col, Container, Row } from "react-bootstrap";
 import ProjectBox from "../../Components/ProjectBox/ProjectBox.jsx";
 import { useEffect, useState } from "preact/hooks";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProjectFromServer } from "../../Redux/Stores/Projects";
 
 export default function Portfolio() {
   const [allProject, setAllProject] = useState([]);
-  const allProjectFromServer = useSelector((state) => state.projects);
-  const dispatch = useDispatch();
-  const [showLoader, setShowLoader] = useState(true);
 
-  useEffect(async () => {
-    await dispatch(getAllProjectFromServer());
-    await setAllProject(allProjectFromServer);
+  useEffect(() => {
+    fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+      .then((res) => res.json())
+      .then((data) => setAllProject(data));
   }, []);
 
   return (
@@ -30,7 +26,7 @@ export default function Portfolio() {
             You Can Access To My Project From{" "}
             <a
               href="https://github.com/engrmh"
-              className="text-white text-decoration-none"
+              className="text-white"
               target="_blank"
             >
               My GitHub
