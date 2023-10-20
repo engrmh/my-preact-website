@@ -1,16 +1,13 @@
 import { Button, Col, Table } from "react-bootstrap";
 import { useEffect, useState } from "preact/hooks";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProjectFromServer } from "../../../Redux/Stores/Projects";
 
 export default function ProjectSection() {
   const [allProject, setAllProject] = useState([]);
-  const allProjectFromServer = useSelector((state) => state.projects);
-  const dispatch = useDispatch();
 
-  useEffect(async () => {
-    await dispatch(getAllProjectFromServer());
-    await setAllProject(allProjectFromServer);
+  useEffect(() => {
+    fetch("https://apptest.bashiridev.ir/api/Projects/GetProjects")
+      .then((res) => res.json())
+      .then((data) => setAllProject(data));
   }, []);
   return (
     <Col xs={12} md={8} lg={8} className="mt-4 mb-4 mb-lg-0">
