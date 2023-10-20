@@ -20,8 +20,8 @@ export default function ProjectSection() {
         </div>
         <hr className="pb-2" />
         <div className="">
-          <div class="">
-            <Table striped hover>
+          <div class="w-100 overflow-x-auto">
+            <Table striped hover className=''>
               <thead>
                 <tr className="table-danger">
                   <th>#</th>

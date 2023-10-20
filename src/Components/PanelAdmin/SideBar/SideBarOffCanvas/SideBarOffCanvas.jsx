@@ -35,7 +35,7 @@ export default function SideBarOffCanvas() {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
             <a
-              href="/dashboard"
+              href="/"
               className="text-white text-decoration-none fs-4"
             >
               SKYLAX

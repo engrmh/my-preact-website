@@ -21,7 +21,7 @@ export default function SideBar() {
     <>
       <div className="pt-3 d-none d-lg-block">
         <div class="bg-dark rounded p-2 sideBarContainer text-center">
-          <a href="/dashboard" class="text-white text-decoration-none fs-4">
+          <a href="/" class="text-white text-decoration-none fs-4">
             SKYLAX
           </a>
           <div class="mt-4 d-flex flex-column gap-3">

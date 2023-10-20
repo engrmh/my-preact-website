@@ -19,3 +19,6 @@
 .projectBox:hover  .projectBoxImg{
     transform: scale(1.2) rotate(5deg) !important;
 }
+.cardContainer{
+    box-shadow: 10px 5px 15px #fff8;
+}
