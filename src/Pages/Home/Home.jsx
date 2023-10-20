@@ -56,7 +56,7 @@ export default function Home() {
         preload="auto"
         className="homeVideoBack"
       >
-        <source src="./../../../public/videos/homepage.mp4" type="video/mp4" />
+        <source src="./videos/homepage.mp4" type="video/mp4" />
       </video>
       <div class="">
         <NavBar active="home" />
