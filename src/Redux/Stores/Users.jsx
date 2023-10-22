@@ -9,6 +9,8 @@ export const getAllUsersFromServer = createAsyncThunk(
   }
 );
 
+const userTokenFromLocalStorage = localStorage.getItem('user')
+
 const userSlice = createSlice({
   name: "User",
   initialState: [],
@@ -17,6 +19,7 @@ const userSlice = createSlice({
       fetch("https://apptest.bashiridev.ir/api/User", {
         method: "POST",
         headers: {
+          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(action.payload),
@@ -27,6 +30,9 @@ const userSlice = createSlice({
     removeUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload}`, {
         method: "DELETE",
+        headers: {
+          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+        },
       })
         .then((res) => res.json())
         .then((data) => data);
@@ -34,6 +40,9 @@ const userSlice = createSlice({
     editUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload.id}`, {
         method: "PUT",
+        headers: {
+          'Authorization' : `Bearer ${userTokenFromLocalStorage}`
+        },
         body: action.payload.data,
       })
         .then((res) => res.json())

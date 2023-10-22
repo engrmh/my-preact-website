@@ -6,11 +6,10 @@ export default function ProjectBox({
   name,
   getClass,
   link = "/portfolio",
-  image = "./img/projectSamplePic.jpg",
+  imageName = "./img/projectSamplePic.jpg",
   customer,
   description,
   creator,
-  imageName,
   projectTechnologies
 }) {
   return (
@@ -28,7 +27,7 @@ export default function ProjectBox({
               <Card.Img
                 variant="top"
                 className="rounded projectBoxImg"
-                src={image}
+                src={imageName}
               />
             </div>
           </div>

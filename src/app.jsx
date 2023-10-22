@@ -131,18 +131,15 @@ export function App() {
   // };
 
   useEffect(() => {
-    const localStorageData = localStorage.getItem("user");
+    const localStorageData = localStorage.getItem("user")
     if (localStorageData) {
-      fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
-        headers: {
-          Authorization: `Bearer ${localStorageData}`,
-        },
-      })
+      fetch(`https://apptest.bashiridev.ir/api/Account/userinfo?authorization=${localStorageData}`)
         .then((res) => res.json())
         .then((userData) => {
-          setIsLogin(true);
-          setUserInfos(userData);
-        });
+          setLogin(true);
+          setUserInfos(userData.userName);
+          // console.log(userData);
+        })
     } else {
       setLogin(false);
     }

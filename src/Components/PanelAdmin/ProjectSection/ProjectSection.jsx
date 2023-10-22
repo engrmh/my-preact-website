@@ -34,7 +34,7 @@ export default function ProjectSection() {
               <tbody>
                 {allProject.slice(0, 6).map((project, index) => (
                   <tr key={index}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>{project.name}</td>
                     <td>{project.customer}</td>
                     <td>{project.salary}</td>

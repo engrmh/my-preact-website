@@ -9,6 +9,7 @@ export const getAllTasksFromServer = createAsyncThunk(
   }
 );
 
+const userTokenFromLocalStorage = localStorage.getItem('user')
 const taskSlice = createSlice({
   name: "Task",
   initialState: [],
@@ -17,6 +18,7 @@ const taskSlice = createSlice({
       fetch("https://apptest.bashiridev.ir/api/Task/PostTask", {
         method: "POST",
         headers: {
+          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(action.payload),
@@ -29,6 +31,9 @@ const taskSlice = createSlice({
         `https://apptest.bashiridev.ir/api/Task/DeleteTask/${action.payload}`,
         {
           method: "DELETE",
+          headers:{
+            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+          }
         }
       )
         .then((res) => res.json())
@@ -40,6 +45,7 @@ const taskSlice = createSlice({
         {
           method: "PUT",
           headers: {
+            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(action.payload.data),
