@@ -5,6 +5,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirectionRToL";
+import VideoChatIcon from "@mui/icons-material/VideoChat";
 import TaskIcon from "@mui/icons-material/Task";
 import { Offcanvas } from "react-bootstrap";
 import { useContext, useEffect, useState } from "preact/hooks";
@@ -34,10 +35,7 @@ export default function SideBarOffCanvas() {
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            <a
-              href="/"
-              className="text-white text-decoration-none fs-4"
-            >
+            <a href="/" className="text-white text-decoration-none fs-4">
               SKYLAX
             </a>
           </Offcanvas.Title>
@@ -134,6 +132,23 @@ export default function SideBarOffCanvas() {
               >
                 <ShortcutIcon />
                 <span className="text-white">Shortcuts</span>
+              </a>
+              <a
+                // href="/dashboard/videoChat"
+                onClick={() => {
+                  handleClose();
+                  setActiveMenu("videoChat");
+                }}
+                className={
+                  activeMenu === "analytics"
+                    ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                    : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+                }
+              >
+                <VideoChatIcon />
+                <span className="text-white">
+                  Video Chat
+                </span>
               </a>
               <a
                 href="/dashboard/analytics"

@@ -6,6 +6,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import ShortcutIcon from "@mui/icons-material/Shortcut";
 import FormatTextdirectionRToLIcon from "@mui/icons-material/FormatTextdirectionRToL";
+import VideoChatIcon from "@mui/icons-material/VideoChat";
 import TaskIcon from "@mui/icons-material/Task";
 import { useContext, useEffect, useState } from "preact/hooks";
 import SkylaxContext from "../../../Context/Context.jsx";
@@ -96,6 +97,18 @@ export default function SideBar() {
             >
               <ShortcutIcon />
               <span className="text-white">Shortcuts</span>
+            </a>
+            <a
+              // href="/dashboard/videoChat"
+              disabled
+              onClick={() => {
+                handleClose();
+                setActiveMenu("videoChat");
+              }}
+              className="rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+            >
+              <VideoChatIcon />
+              <span className="text-white">Video Chat</span>
             </a>
             <a
               href="/dashboard/analytics"
