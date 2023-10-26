@@ -9,16 +9,17 @@
     transform: translateY(-20px) !important;
     /*transform: scale(1.3) !important;*/
     transition: all 0.3s linear;
+    box-shadow: 0px 5px 15px #fff8;
 }
 .projectBoxImgBox{
     transition: all 0.3s linear;
 }
-.projectBox:hover .projectBoxImgBox{
+/* .projectBox:hover .projectBoxImgBox{
     overflow: hidden !important;
-}
-.projectBox:hover  .projectBoxImg{
+} */
+/* .projectBox:hover  .projectBoxImg{
     transform: scale(1.2) rotate(5deg) !important;
-}
+} */
 .cardContainer{
     box-shadow: 10px 5px 15px #fff8;
 }

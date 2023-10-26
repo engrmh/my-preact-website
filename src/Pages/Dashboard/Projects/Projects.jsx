@@ -165,6 +165,7 @@ export default function Projects() {
         setProjectPhoto("");
         setProjectDesc("");
         setOpeningModal(false);
+        Swal.fire("Added Successfully", "", "success");
       }
     }
     if (typeOfModal === "edit") {
@@ -184,7 +185,7 @@ export default function Projects() {
         setProjectDesc("");
         setOpeningModal(false);
         dispatch(getAllProjectFromServer());
-        Swal.fire("Added Successfully", "", "success");
+        Swal.fire("Edited Successfully", "", "success");
       }
     }
   };
@@ -283,7 +284,7 @@ export default function Projects() {
       </Row>
       {openingModal && (
         <DataHandlerModals
-          modalTitle="Add New Project"
+          modalTitle={typeOfModal === 'add' ? 'Add New Project' : 'Edit Project'}
           modalType={typeOfModal}
           showStatus={openingModal}
           sendCloseData={(modalStatus) => modalStatusHandler(modalStatus)}
