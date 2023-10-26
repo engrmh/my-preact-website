@@ -134,21 +134,19 @@ export default function SideBarOffCanvas() {
                 <span className="text-white">Shortcuts</span>
               </a>
               <a
-                // href="/dashboard/videoChat"
+                href="/dashboard/videochat"
                 onClick={() => {
                   handleClose();
                   setActiveMenu("videoChat");
                 }}
                 className={
-                  activeMenu === "analytics"
+                  activeMenu === "videoChat"
                     ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
                     : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
                 }
               >
                 <VideoChatIcon />
-                <span className="text-white">
-                  Video Chat
-                </span>
+                <span className="text-white">Video Chat</span>
               </a>
               <a
                 href="/dashboard/analytics"

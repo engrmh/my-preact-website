@@ -2,15 +2,15 @@ import Router, { getCurrentUrl, route } from "preact-router";
 import "./app.css";
 import Home from "./Pages/Home/Home.jsx";
 import About from "./Pages/About/About.jsx";
-import Page404 from "./Pages/Page404/Page404.jsx";
-import Resume from "./Pages/Resume/Resume.jsx";
-import CurrentProject from "./Pages/CurrentProject/CurrentProject.jsx";
-import Portfolio from "./Pages/Portfolio/Portfolio.jsx";
-import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
-import Projects from "./Pages/Dashboard/Projects/Projects.jsx";
+import Page404 from "./Pages/Page404/Page404";
+import Resume from "./Pages/Resume/Resume";
+import CurrentProject from "./Pages/CurrentProject/CurrentProject";
+import Portfolio from "./Pages/Portfolio/Portfolio";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Projects from "./Pages/Dashboard/Projects/Projects";
 import { useEffect, useState } from "preact/hooks";
-import SkylaxContext from "./Context/Context.jsx";
-import Login from "./Pages/Login/Login.jsx";
+import SkylaxContext from "./Context/Context";
+import Login from "./Pages/Login/Login";
 import { Col, Container, Row } from "react-bootstrap";
 import TopBar from "./Components/PanelAdmin/TopBar/TopBar";
 import SideBar from "./Components/PanelAdmin/SideBar/SideBar";
@@ -22,6 +22,7 @@ import Tasks from "./Pages/Dashboard/Tasks/Tasks";
 import CurrentTask from "./Pages/Dashboard/CurrentTask/CurrentTask";
 import ShortCuts from "./Pages/Dashboard/ShortCuts/ShortCuts";
 import Profile from "./Pages/Dashboard/Profile/Profile";
+import VideoChat from "./Pages/Dashboard/VideoChat/VideoChat";
 import { useCallback } from "react";
 import Swal from "sweetalert2";
 
@@ -194,6 +195,7 @@ export function App() {
                       <CurrentTask path="/dashboard/currentTask/:id" />
                       <ShortCuts path="/dashboard/shortcuts" />
                       <Profile path="/dashboard/profile" />
+                      <VideoChat path="/dashboard/videochat"/>
                       {/*<Page404 path="/dashboard/*" default />*/}
                     </Router>
                   </div>

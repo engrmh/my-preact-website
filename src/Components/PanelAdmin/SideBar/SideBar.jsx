@@ -99,13 +99,15 @@ export default function SideBar() {
               <span className="text-white">Shortcuts</span>
             </a>
             <a
-              // href="/dashboard/videoChat"
-              disabled
+              href="/dashboard/videochat"
               onClick={() => {
-                handleClose();
                 setActiveMenu("videoChat");
               }}
-              className="rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+              className={
+                activeMenu === "videoChat"
+                  ? "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none sideBarLinkActive"
+                  : "sideBarLink rounded d-flex align-items-center gap-2 p-2 text-white text-decoration-none"
+              }
             >
               <VideoChatIcon />
               <span className="text-white">Video Chat</span>
