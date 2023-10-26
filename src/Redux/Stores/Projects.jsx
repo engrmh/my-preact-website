@@ -16,10 +16,10 @@ const projectSlice = createSlice({
     addProject: (state, action) => {
       fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
         method: "POST",
-        // headers: {
-        //   'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
-        // },
-        // body: JSON.stringify(action.payload),
+        headers: {
+          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+        },
+        body: JSON.stringify(action.payload),
         body: action.payload,
       })
         .then((res) => res.json())
