@@ -16,7 +16,7 @@ import { gsap } from "gsap";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function Home() {
-  const [localStorageData, setLocalStorageData] = useState(false);
+  const [userTokenData , setUserTokenData] = useState(false);
 
   useEffect(() => {
     gsap.context(() => {
@@ -41,11 +41,22 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const localData = localStorage.getItem("user");
-    if (localData) {
-      setLocalStorageData(true);
+    const authToken = getCookie("skylaxUserToken");
+    if (authToken) {
+      setUserTokenData(true);
     }
   }, []);
+
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName === name) {
+        return cookieValue;
+      }
+    }
+    return null;
+  }
 
   return (
     <div className="homeContainer vh-100">
@@ -105,7 +116,7 @@ export default function Home() {
       <Container className="position-fixed bottom-0 start-0 end-0 py-3">
         <div className="d-flex">
           <div className="d-flex gap-3">
-            {localStorageData ? (
+            {userTokenData ? (
               <SocialApp link="/dashboard" classInfo="">
                 <DashboardIcon className="text-white fs-3 social" />
               </SocialApp>

@@ -41,6 +41,8 @@ export default function TopBar() {
     setUserNameData(siteContext.userInfos);
   }, []);
 
+  const pastDate = new Date(0);
+
   return (
     <div className="pt-3">
       <div class="bg-dark rounded">
@@ -91,7 +93,8 @@ export default function TopBar() {
                     href="/"
                     className="customRedFont"
                     onClick={() => {
-                      localStorage.clear();
+                      document.cookie = `skylaxUserToken=; expires=${pastDate.toUTCString()}; path=/`;
+
                     }}
                   >
                     <LogoutIcon />

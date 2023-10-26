@@ -46,6 +46,23 @@ export function App() {
     },
   });
 
+  function setCookieWithExpiration(name, value) {
+    const expirationTime = 24 * 60 * 60 * 1000;
+    const expirationDate = new Date(Date.now() + expirationTime);
+    document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
+  }
+
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (const cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName === name) {
+        return cookieValue;
+      }
+    }
+    return null;
+  }
+
   const loginAction = (userDataForLogin) => {
     fetch("https://apptest.bashiridev.ir/api/Account/login", {
       method: "POST",
@@ -61,7 +78,7 @@ export function App() {
       })
       .then((result) => {
         setLogin(true);
-        localStorage.setItem("user", result.token);
+        setCookieWithExpiration("skylaxUserToken", result.token);
         setToken(result.token);
         setSiteLocation(getCurrentUrl());
       })
@@ -99,47 +116,17 @@ export function App() {
     }
   };
 
-  // const logout = useCallback(() => {
-  //   setToken(null);
-  //   setUserInfos({});
-  //   setIsLogin(false);
-  //   localStorage.removeItem("user");
-  // }, []);
-
-  // const getUserInfosFromServer = (tokenData) => {
-  //   fetch(`https://apptest.bashiridev.ir/api/Account/login`, {
-  //     headers: {
-  //       Authorization: `Bearer ${tokenData}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((userData) => {
-  //       setIsLogin(true);
-  //       setUserInfos(userData);
-  //       console.log(userData);
-  //     });
-  // };
-
-  // const chechIsUserLogin = (tokenData) => {
-  //   fetch(`https://apptest.bashiridev.ir/api/Account/login`)
-  //     .then((res) => res.json())
-  //     .then((userData) => {
-  //       setIsLogin(true);
-  //       setUserInfos(userData);
-  //       console.log(userData);
-  //     });
-  // };
-
   useEffect(() => {
-    const localStorageData = localStorage.getItem("user")
-    if (localStorageData) {
-      fetch(`https://apptest.bashiridev.ir/api/Account/userinfo?authorization=${localStorageData}`)
+    const authToken = getCookie("skylaxUserToken");
+    if (authToken) {
+      fetch(
+        `https://apptest.bashiridev.ir/api/Account/userinfo?authorization=${authToken}`
+      )
         .then((res) => res.json())
         .then((userData) => {
           setLogin(true);
           setUserInfos(userData.userName);
-          // console.log(userData);
-        })
+        });
     } else {
       setLogin(false);
     }
