@@ -10,12 +10,12 @@ export const getAllTasksFromServer = createAsyncThunk(
   }
 );
 
-function getCookie() {
+function getCookie(name) {
   const cookies = document.cookie.split("; ");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.split("=");
     if (cookieName === name) {
-      return (userToken = cookieValue);
+      return cookieValue;
     }
   }
   return null;
@@ -41,9 +41,9 @@ const taskSlice = createSlice({
         .then(() => {
           Swal.fire("Added Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     removeTask: (state, action) => {
       fetch(
@@ -60,9 +60,9 @@ const taskSlice = createSlice({
         .then(() => {
           Swal.fire("Removed Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     editTask: (state, action) => {
       fetch(
@@ -81,9 +81,9 @@ const taskSlice = createSlice({
         .then(() => {
           Swal.fire("Edited Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
   },
   extraReducers: {

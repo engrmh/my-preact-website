@@ -9,12 +9,12 @@ export const getAllProjectFromServer = createAsyncThunk(
       .then((data) => data);
   }
 );
-function getCookie() {
+function getCookie(name) {
   const cookies = document.cookie.split("; ");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.split("=");
     if (cookieName === name) {
-      return (userToken = cookieValue);
+      return cookieValue;
     }
   }
   return null;
@@ -32,7 +32,7 @@ const projectSlice = createSlice({
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
-        body: JSON.stringify(action.payload),
+        // body: JSON.stringify(action.payload),
         body: action.payload,
       })
         .then((res) => res.json())
@@ -40,9 +40,9 @@ const projectSlice = createSlice({
         .then(() => {
           Swal.fire("Added Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     removeProject: (state, action) => {
       fetch(
@@ -59,9 +59,9 @@ const projectSlice = createSlice({
         .then(() => {
           Swal.fire("Removed Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     editProject: (state, action) => {
       fetch(
@@ -79,9 +79,9 @@ const projectSlice = createSlice({
         .then(() => {
           Swal.fire("Edited Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
   },
   extraReducers: {

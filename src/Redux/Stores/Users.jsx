@@ -10,12 +10,12 @@ export const getAllUsersFromServer = createAsyncThunk(
   }
 );
 
-function getCookie() {
+function getCookie(name) {
   const cookies = document.cookie.split("; ");
   for (const cookie of cookies) {
     const [cookieName, cookieValue] = cookie.split("=");
     if (cookieName === name) {
-      return (userToken = cookieValue);
+      return cookieValue;
     }
   }
   return null;
@@ -41,9 +41,9 @@ const userSlice = createSlice({
         .then(() => {
           Swal.fire("Added Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     removeUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload}`, {
@@ -57,9 +57,9 @@ const userSlice = createSlice({
         .then(() => {
           Swal.fire("Removed Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
     editUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload.id}`, {
@@ -74,9 +74,9 @@ const userSlice = createSlice({
         .then(() => {
           Swal.fire("Edited Successfully", "", "success");
         })
-        .catch(() => {
-          Swal.fire("Server Error", "", "error");
-        });
+        // .catch(() => {
+        //   Swal.fire("Server Error", "", "error");
+        // });
     },
   },
   extraReducers: {

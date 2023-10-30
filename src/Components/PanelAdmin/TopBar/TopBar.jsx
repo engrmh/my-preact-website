@@ -10,7 +10,7 @@ import PowerOffIcon from "@mui/icons-material/PowerOff";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import WarningIcon from '@mui/icons-material/Warning';
+import WarningIcon from "@mui/icons-material/Warning";
 import SkylaxContext from "../../../Context/Context";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { getCurrentUrl } from "preact-router";
@@ -94,7 +94,7 @@ export default function TopBar() {
                     className="customRedFont"
                     onClick={() => {
                       document.cookie = `skylaxUserToken=; expires=${pastDate.toUTCString()}; path=/`;
-
+                      document.cookie = `skylaxUserEmail=; expires=${pastDate.toUTCString()}; path=/`;
                     }}
                   >
                     <LogoutIcon />

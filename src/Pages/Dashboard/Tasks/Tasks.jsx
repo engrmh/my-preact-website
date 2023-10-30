@@ -98,9 +98,9 @@ export default function Tasks() {
             <div className="d-flex gap-1">
               <Button
                 className="customGreen p-1 border-0"
+                disabled={params.row.completeAt !== "" && true}
                 onClick={() => {
                   setTaskID(params.row.id);
-                  // completeHandler(params);
                   setCompleteAt(
                     `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`
                   );
@@ -122,6 +122,7 @@ export default function Tasks() {
               </Button>
               <Button
                 className="customBlue p-1 border-0"
+                disabled={params.row.completeAt !== "" && true}
                 onClick={() => {
                   setTaskID(params.row.id);
                   setTaskName(params.row.title);
