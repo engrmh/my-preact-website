@@ -36,7 +36,13 @@ const taskSlice = createSlice({
         body: JSON.stringify(action.payload),
       })
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Added Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     removeTask: (state, action) => {
       fetch(
@@ -49,7 +55,13 @@ const taskSlice = createSlice({
         }
       )
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Removed Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     editTask: (state, action) => {
       fetch(
@@ -64,7 +76,13 @@ const taskSlice = createSlice({
         }
       )
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Edited Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
   },
   extraReducers: {

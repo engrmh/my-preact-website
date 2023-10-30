@@ -36,8 +36,6 @@ export default function Tasks() {
     completeAt: "",
   };
 
-  // console.log(useSelector((state) => state.tasks));
-
   useEffect(() => {
     dispatch(getAllTasksFromServer());
     setAllTasks(allTasksFormServer);
@@ -167,7 +165,6 @@ export default function Tasks() {
         setCreateAt("");
         setOpeningModal(false);
         dispatch(getAllTasksFromServer());
-        Swal.fire("Added Successfully", "", "success");
       }
     }
     if (typeOfModal === "edit") {
@@ -200,7 +197,6 @@ export default function Tasks() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeTask(data.row.id));
-        Swal.fire("Removed Successfully", "", "success");
         setShowAllData(false);
         dispatch(getAllTasksFromServer());
       } else if (result.isDenied) {
