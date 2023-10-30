@@ -79,8 +79,10 @@ export function App() {
       .then((result) => {
         setLogin(true);
         setCookieWithExpiration("skylaxUserToken", result.token);
-        setToken(result.token);
+        setCookieWithExpiration("skylaxUserEmail", result.email);
         setSiteLocation(getCurrentUrl());
+        setUserInfos(result);
+        console.log(result);
       })
       .then((e) => {
         setLogin(true);
@@ -117,16 +119,11 @@ export function App() {
   };
 
   useEffect(() => {
-    const authToken = getCookie("skylaxUserToken");
-    if (authToken) {
-      fetch(
-        `https://apptest.bashiridev.ir/api/Account/userinfo?authorization=${authToken}`
-      )
-        .then((res) => res.json())
-        .then((userData) => {
-          setLogin(true);
-          setUserInfos(userData.userName);
-        });
+    const userTokenData = getCookie("skylaxUserToken");
+    if (userTokenData) {
+      const userEmail = getCookie("skylaxUserEmail");
+      setLogin(true);
+      setUserInfos(userEmail);
     } else {
       setLogin(false);
     }
