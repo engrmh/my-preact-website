@@ -141,7 +141,6 @@ export default function Users() {
         setUserPassword("");
         setOpeningModal(false);
         dispatch(getAllUsersFromServer());
-        Swal.fire("Added Successfully", "", "success");
       }
     }
     if (typeOfModal === "edit") {
@@ -163,7 +162,6 @@ export default function Users() {
         setUserRol("");
         setUserPassword("");
         setOpeningModal(false);
-        Swal.fire("Edited Successfully", "", "success");
       }
     }
   };
@@ -176,7 +174,6 @@ export default function Users() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeUser(data.row.id));
-        Swal.fire("Removed Successfully", "", "success");
         setShowAllData(false);
         dispatch(getAllUsersFromServer());
       } else if (result.isDenied) {

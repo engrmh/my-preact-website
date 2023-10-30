@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 export const getAllUsersFromServer = createAsyncThunk(
   "User/getAllUsersFromServer",
@@ -36,7 +37,13 @@ const userSlice = createSlice({
         body: JSON.stringify(action.payload),
       })
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Added Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     removeUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload}`, {
@@ -46,7 +53,13 @@ const userSlice = createSlice({
         },
       })
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Removed Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     editUser: (state, action) => {
       fetch(`https://apptest.bashiridev.ir/api/User/${action.payload.id}`, {
@@ -57,7 +70,13 @@ const userSlice = createSlice({
         body: action.payload.data,
       })
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Edited Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
   },
   extraReducers: {
