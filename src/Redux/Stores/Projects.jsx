@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 export const getAllProjectFromServer = createAsyncThunk(
   "Projects/getAllProjectFromServer",
@@ -35,7 +36,13 @@ const projectSlice = createSlice({
         body: action.payload,
       })
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Added Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     removeProject: (state, action) => {
       fetch(
@@ -48,7 +55,13 @@ const projectSlice = createSlice({
         }
       )
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Removed Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
     editProject: (state, action) => {
       fetch(
@@ -62,7 +75,13 @@ const projectSlice = createSlice({
         }
       )
         .then((res) => res.json())
-        .then((data) => data);
+        .then((data) => data)
+        .then(() => {
+          Swal.fire("Edited Successfully", "", "success");
+        })
+        .catch(() => {
+          Swal.fire("Server Error", "", "error");
+        });
     },
   },
   extraReducers: {
