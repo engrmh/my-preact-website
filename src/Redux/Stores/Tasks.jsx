@@ -9,7 +9,19 @@ export const getAllTasksFromServer = createAsyncThunk(
   }
 );
 
-const userTokenFromLocalStorage = localStorage.getItem('user')
+function getCookie() {
+  const cookies = document.cookie.split("; ");
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+    if (cookieName === name) {
+      return (userToken = cookieValue);
+    }
+  }
+  return null;
+}
+
+const userToken = getCookie("skylaxUserToken");
+
 const taskSlice = createSlice({
   name: "Task",
   initialState: [],
@@ -18,7 +30,7 @@ const taskSlice = createSlice({
       fetch("https://apptest.bashiridev.ir/api/Task/PostTask", {
         method: "POST",
         headers: {
-          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+          Authorization: `Bearer ${userToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(action.payload),
@@ -31,9 +43,9 @@ const taskSlice = createSlice({
         `https://apptest.bashiridev.ir/api/Task/DeleteTask/${action.payload}`,
         {
           method: "DELETE",
-          headers:{
-            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
-          }
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
         }
       )
         .then((res) => res.json())
@@ -45,7 +57,7 @@ const taskSlice = createSlice({
         {
           method: "PUT",
           headers: {
-            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+            Authorization: `Bearer ${userToken}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(action.payload.data),
