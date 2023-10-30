@@ -8,7 +8,19 @@ export const getAllProjectFromServer = createAsyncThunk(
       .then((data) => data);
   }
 );
-const userTokenFromLocalStorage = localStorage.getItem('user')
+function getCookie() {
+  const cookies = document.cookie.split("; ");
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+    if (cookieName === name) {
+      return (userToken = cookieValue);
+    }
+  }
+  return null;
+}
+
+const userToken = getCookie("skylaxUserToken");
+
 const projectSlice = createSlice({
   name: "Projects",
   initialState: [],
@@ -17,7 +29,7 @@ const projectSlice = createSlice({
       fetch("https://apptest.bashiridev.ir/api/Projects/PostProject", {
         method: "POST",
         headers: {
-          'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+          Authorization: `Bearer ${userToken}`,
         },
         body: JSON.stringify(action.payload),
         body: action.payload,
@@ -31,8 +43,8 @@ const projectSlice = createSlice({
         {
           method: "DELETE",
           headers: {
-            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
-          }
+            Authorization: `Bearer ${userToken}`,
+          },
         }
       )
         .then((res) => res.json())
@@ -43,8 +55,8 @@ const projectSlice = createSlice({
         `https://apptest.bashiridev.ir/api/Projects/PutProject/${action.payload.id}`,
         {
           method: "PUT",
-          headers:{
-            'Authorization' : `Bearer ${userTokenFromLocalStorage}` ,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
           },
           body: JSON.stringify(action.payload.data),
         }
